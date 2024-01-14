@@ -3,15 +3,15 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>24.1.7.1</Version>
-	  <Description>Advanced working with base .NET type (parsing etc.)</Description>
+    <Version>24.1.13.2</Version>
+    <Description>Advanced working with base .NET type (parsing etc.)</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SunamoArgs" Version="24.1.9.1" />
-    <PackageReference Include="SunamoCollectionsChangeContent" Version="24.1.7.1" />
-    <PackageReference Include="SunamoValues" Version="24.1.9.2" />
-    <PackageReference Include="SunamoExceptions" Version="24.1.5.1" />
-    <PackageReference Include="SunamoExtensions" Version="24.1.5.1" />
+    <PackageReference Include="SunamoArgs" Version="24.1.11.1" />
+    <PackageReference Include="SunamoCollectionsChangeContent" Version="24.1.14.1" />
+    <PackageReference Include="SunamoValues" Version="24.1.10.1" />
+    <PackageReference Include="SunamoExceptions" Version="24.1.11.1" />
+    <PackageReference Include="SunamoExtensions" Version="24.1.10.1" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants);ASYNC</DefineConstants>
