@@ -129,7 +129,7 @@ public partial class BTS
         }
         if (t == Types.tChar)
         {
-            return new Func<string, char>(SH.GetFirstChar);
+            return new Func<string, char>(SHSH.GetFirstChar);
         }
 
         #endregion

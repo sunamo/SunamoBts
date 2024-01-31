@@ -10,6 +10,5 @@ global using SunamoExceptions.InSunamoIsDerivedFrom;
 global using SunamoExceptions.OnlyInSE;
 global using SunamoValues;
 global using System.IO;
-global using SunamoArgs;
 global using System.Threading.Tasks;
 global using SunamoCollectionsChangeContent.Args;

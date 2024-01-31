@@ -67,7 +67,7 @@ public partial class BTSSE
             return false;
         }
 
-        id = SHReplace.ReplaceAll4(id, "", " ");
+        id = SHReplaceSH.ReplaceAll4(id, "", " ");
         Replace(ref id, replaceCommaForDot);
 
 
@@ -93,7 +93,7 @@ public partial class BTSSE
             return false;
         }
 
-        id = SHReplace.ReplaceAll4(id, "", " ");
+        id = SHReplaceSH.ReplaceAll4(id, "", " ");
         Replace(ref id, replaceCommaForDot);
 
         bool vr = long.TryParse(id, out lastLong);

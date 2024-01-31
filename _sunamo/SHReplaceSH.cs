@@ -2,7 +2,7 @@ namespace SunamoBts._sunamo;
 /// <summary>
 /// needed due to cycle detected
 /// </summary>
-internal class SHReplace
+public class SHReplaceSH
 {
-    internal static Func<string, string, string, string> ReplaceAll4;
+    public static Func<string, string, string, string> ReplaceAll4;
 }

@@ -1,5 +1,3 @@
-using SunamoCollectionsChangeContent;
-
 namespace SunamoBts;
 
 public class CAToNumber
@@ -80,8 +78,9 @@ public class CAToNumber
     /// <param name="altitudes"></param>
     public static List<int> ToInt0(IList enumerable)
     {
-        var ts = CA.ToListStringIEnumerable2(enumerable);
-        CAChangeContent.ChangeContent0(null, ts, d => SH.RemoveAfterFirstChar(d.Replace(AllChars.comma, AllChars.dot), AllChars.dot));
+        var ts = CASH.ToListStringIEnumerable2(enumerable);
+        CAChangeContent.ChangeContent0(null, ts, d => d.Replace(AllChars.comma, AllChars.dot));
+        CAChangeContent.ChangeContent0(null, ts, d => d.Substring(0, d.IndexOf(AllChars.dot) + 1));
 
         return ToNumber<int, string>(int.Parse, ts);
     }
@@ -111,7 +110,7 @@ public class CAToNumber
                 continue;
             }
 
-            if (SH.IsNumber(item.ToString(), new Char[] { AllChars.comma, AllChars.dot, AllChars.dash }))
+            if (SHSH.IsNumber(item.ToString(), new Char[] { AllChars.comma, AllChars.dot, AllChars.dash }))
             {
                 var number = parse.Invoke(item.ToString());
 
