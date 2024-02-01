@@ -67,7 +67,7 @@ public partial class BTSSE
             return false;
         }
 
-        id = SHReplaceSH.ReplaceAll4(id, "", " ");
+        id = id.Replace(" ", "");
         Replace(ref id, replaceCommaForDot);
 
 
@@ -78,7 +78,7 @@ public partial class BTSSE
             {
                 if (excIfIsFloat)
                 {
-                    ThrowEx.Custom(id + " is float but is calling IsInt");
+                    throw new Exception(id + " is float but is calling IsInt");
                 }
             }
         }
@@ -93,7 +93,7 @@ public partial class BTSSE
             return false;
         }
 
-        id = SHReplaceSH.ReplaceAll4(id, "", " ");
+        id = id.Replace(" ", ""); //SHReplaceSH.ReplaceAll4(, "", " ");
         Replace(ref id, replaceCommaForDot);
 
         bool vr = long.TryParse(id, out lastLong);
@@ -103,7 +103,7 @@ public partial class BTSSE
             {
                 if (excIfIsDouble)
                 {
-                    ThrowEx.Custom(id + " is float but is calling IsInt");
+                    throw new Exception(id + " is float but is calling IsInt");
                 }
             }
         }

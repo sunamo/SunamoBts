@@ -129,7 +129,7 @@ public partial class BTS
         }
         if (t == Types.tChar)
         {
-            return new Func<string, char>(SHSH.GetFirstChar);
+            return new Func<string, char>((string s) => s[0]);
         }
 
         #endregion
@@ -257,7 +257,7 @@ public partial class BTS
         {
             return ulong.MinValue;
         }
-        ThrowEx.Custom("Nepovolen\u00FD nehodnotov\u00FD typ v metod\u011B GetMinValueForType");
+        throw new Exception("Nepovolen\u00FD nehodnotov\u00FD typ v metod\u011B GetMinValueForType");
         return null;
     }
 

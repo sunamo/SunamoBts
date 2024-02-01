@@ -1,4 +1,6 @@
-﻿//using System;
+namespace SunamoBts._sunamo;
+
+//using System;
 //using System.Collections.Generic;
 //using System.Linq;
 //using System.Text;
@@ -8,20 +10,20 @@
 
 //namespace SunamoBts._sunamo
 //{
-//    public class BtsInit
+//    internal class BtsInit
 //    {
-//        public static void Ca(Func<IList, List<string>> ToListStringIEnumerable2, Func<ChangeContentArgs, List<string>, Func<string, string>, List<string>> ChangeContent0)
+//        internal static void Ca(Func<IList, List<string>> ToListStringIEnumerable2, Func<ChangeContentArgs, List<string>, Func<string, string>, List<string>> ChangeContent0)
 //        {
 //            CA2.ChangeContent0 = ChangeContent0;
 //            CA2.ToListStringIEnumerable2 = ToListStringIEnumerable2;
 //        }
 
-//        public static void Nh(Action<List<byte>> RemoveEndingZeroPadding)
+//        internal static void Nh(Action<List<byte>> RemoveEndingZeroPadding)
 //        {
 //            SunamoBts._sunamo.NH.RemoveEndingZeroPadding = RemoveEndingZeroPadding;
 //        }
 
-//        public static void Sh(Func<string, string> FromSpace160To32, Func<string, char[], bool> IsNumber, Func<int, int, string> MakeUpToXChars, Func<string, char> GetFirstChar, Func<string, char, string> RemoveAfterFirstChar)
+//        internal static void Sh(Func<string, string> FromSpace160To32, Func<string, char[], bool> IsNumber, Func<int, int, string> MakeUpToXChars, Func<string, char> GetFirstChar, Func<string, char, string> RemoveAfterFirstChar)
 //        {
 //            SH2.FromSpace160To32 = FromSpace160To32;
 //            SH2.IsNumber = IsNumber;
@@ -30,7 +32,7 @@
 //            SH2.RemoveAfterFirstChar = RemoveAfterFirstChar;
 //        }
 
-//        public static void ShReplace(Func<string, string, string, string> ReplaceAll4)
+//        internal static void ShReplace(Func<string, string, string, string> ReplaceAll4)
 //        {
 //            SunamoBts._sunamo.SHReplace.ReplaceAll4 = ReplaceAll4;
 //        }

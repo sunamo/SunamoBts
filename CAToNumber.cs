@@ -76,11 +76,18 @@ public class CAToNumber
     /// Poslední číslo je počet parametrů navíc po seznamu stringů
     /// </summary>
     /// <param name="altitudes"></param>
-    public static List<int> ToInt0(IList enumerable)
+    public static List<int> ToInt0(List<string> ts)
     {
-        var ts = CASH.ToListStringIEnumerable2(enumerable);
-        CAChangeContent.ChangeContent0(null, ts, d => d.Replace(AllChars.comma, AllChars.dot));
-        CAChangeContent.ChangeContent0(null, ts, d => d.Substring(0, d.IndexOf(AllChars.dot) + 1));
+        //var ts = CASH.ToListStringIEnumerable2(enumerable);
+
+        for (int i = 0; i < ts.Count; i++)
+        {
+            ts[i] = ts[i].Replace(AllChars.comma, AllChars.dot);
+            ts[i] = ts[i].Substring(0, ts[i].IndexOf(AllChars.dot) + 1);
+        }
+
+        //CAChangeContent.ChangeContent0(null, ts, d => d.Replace(AllChars.comma, AllChars.dot));
+        //CAChangeContent.ChangeContent0(null, ts, d => d.Substring(0, d.IndexOf(AllChars.dot) + 1));
 
         return ToNumber<int, string>(int.Parse, ts);
     }
@@ -110,7 +117,7 @@ public class CAToNumber
                 continue;
             }
 
-            if (SHSH.IsNumber(item.ToString(), new Char[] { AllChars.comma, AllChars.dot, AllChars.dash }))
+            if (double.TryParse(item.ToString(), out var _) /*SHSH.IsNumber(item.ToString(), new Char[] { AllChars.comma, AllChars.dot, AllChars.dash })*/)
             {
                 var number = parse.Invoke(item.ToString());
 

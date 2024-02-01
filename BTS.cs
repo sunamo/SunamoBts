@@ -287,7 +287,7 @@ public partial class BTS : BTSSE
 
     public static double ParseDouble(string entry, double _default)
     {
-        entry = SHSH.FromSpace160To32(entry);
+        //entry = SHSH.FromSpace160To32(entry);
         entry = entry.Replace(" ", string.Empty);
         //var ch = entry[3];
 
@@ -301,7 +301,7 @@ public partial class BTS : BTSSE
 
     public static int ParseInt(string entry, int _default)
     {
-        entry = SHSH.FromSpace160To32(entry);
+        //entry = SHSH.FromSpace160To32(entry);
         entry = entry.Replace(" ", string.Empty);
         //var ch = entry[3];
 
@@ -433,7 +433,7 @@ public partial class BTS : BTSSE
 
     public static string ConvertFromBytesToUtf8(List<byte> bajty)
     {
-        NHSH.RemoveEndingZeroPadding(bajty);
+        //NHSH.RemoveEndingZeroPadding(bajty);
         return Encoding.UTF8.GetString(bajty.ToArray());
     }
 
@@ -536,7 +536,7 @@ public partial class BTS : BTSSE
     {
         for (int i = input.Count - 1; i >= 0; i--)
         {
-            if (!SHSH.IsNumber(input[i].ToString(), EmptyArrays.Chars))
+            if (!double.TryParse(input[i].ToString(), out var _))
             {
                 input.RemoveAt(i);
             }
@@ -618,19 +618,19 @@ public partial class BTS : BTSSE
     public static string SameLenghtAllDateTimes(DateTime dateTime)
     {
         string year = dateTime.Year.ToString();
-        string month = SHSH.MakeUpToXChars(dateTime.Month, 2);
-        string day = SHSH.MakeUpToXChars(dateTime.Day, 2);
-        string hour = SHSH.MakeUpToXChars(dateTime.Hour, 2);
-        string minutes = SHSH.MakeUpToXChars(dateTime.Minute, 2);
-        string seconds = SHSH.MakeUpToXChars(dateTime.Second, 2);
+        string month = dateTime.Month.ToString("D2");
+        string day = dateTime.Day.ToString("D2");
+        string hour = dateTime.Hour.ToString("D2");
+        string minutes = dateTime.Minute.ToString("D2");
+        string seconds = dateTime.Second.ToString("D2");
         return day + AllStringsSE.dot + month + AllStringsSE.dot + year + AllStringsSE.space + hour + AllStringsSE.colon + minutes + AllStringsSE.colon + seconds;// +AllStrings.colon + miliseconds;
     }
 
     public static string SameLenghtAllDates(DateTime dateTime)
     {
         string year = dateTime.Year.ToString();
-        string month = SHSH.MakeUpToXChars(dateTime.Month, 2);
-        string day = SHSH.MakeUpToXChars(dateTime.Day, 2);
+        string month = dateTime.Month.ToString("D2");
+        string day = dateTime.Day.ToString("D2");
         return day + AllStringsSE.dot + month + AllStringsSE.dot + year; // +AllStrings.space + hour + AllStrings.colon + minutes + AllStrings.colon + seconds;// +AllStrings.colon + miliseconds;
     }
 
@@ -638,9 +638,9 @@ public partial class BTS : BTSSE
 
     public static string SameLenghtAllTimes(DateTime dateTime)
     {
-        string hour = SHSH.MakeUpToXChars(dateTime.Hour, 2);
-        string minutes = SHSH.MakeUpToXChars(dateTime.Minute, 2);
-        string seconds = SHSH.MakeUpToXChars(dateTime.Second, 2);
+        string hour = dateTime.Hour.ToString("D2");
+        string minutes = dateTime.Minute.ToString("D2");
+        string seconds = dateTime.Second.ToString("D2");
         return hour + AllStringsSE.colon + minutes + AllStringsSE.colon + seconds;// +AllStrings.colon + miliseconds;
     }
 
@@ -722,7 +722,7 @@ public partial class BTS : BTSSE
         {
             return ulong.MaxValue;
         }
-        ThrowEx.Custom("Nepovolen\u00FD nehodnotov\u00FD typ v metod\u011B GetMaxValueForType");
+        throw new Exception("Nepovolen\u00FD nehodnotov\u00FD typ v metod\u011B GetMaxValueForType");
         return 0;
     }
 

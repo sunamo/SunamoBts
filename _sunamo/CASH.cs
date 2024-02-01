@@ -1,9 +1,11 @@
+
 namespace SunamoBts._sunamo;
+//namespace SunamoBts._sunamo;
 
-public class CASH
-{
-    public static Func<IList, List<string>> ToListStringIEnumerable2;
-    //public static Func<ChangeContentArgs, List<string>, Func<string, string>, List<string>> ChangeContent0;
+//internal class CASH
+//{
+//    internal static Func<IList, List<string>> ToListStringIEnumerable2;
+//    //internal static Func<ChangeContentArgs, List<string>, Func<string, string>, List<string>> ChangeContent0;
 
 
-}
+//}
