@@ -5,7 +5,6 @@ global using System.Text;
 global using System.Collections;
 global using System.Globalization;
 global using System.Runtime.CompilerServices;
-global using SunamoBts._sunamo;
 global using SunamoExceptions.InSunamoIsDerivedFrom;
 global using SunamoExceptions.OnlyInSE;
 global using SunamoValues;
