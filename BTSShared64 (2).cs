@@ -154,7 +154,7 @@ public partial class BTS
     {
 
         int lastInt2 = 0;
-        if (int.TryParse(entry.Replace(AllStringsSE.space, string.Empty), out lastInt2))
+        if (int.TryParse(entry.Replace(AllStrings.space, string.Empty), out lastInt2))
         {
             return lastInt2;
         }
