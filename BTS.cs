@@ -1,3 +1,5 @@
+using SunamoBts._sunamo;
+
 namespace SunamoBts;
 
 /// <summary>
@@ -235,7 +237,7 @@ public partial class BTS : BTSSE
     {
         float vr = float.MinValue;
 
-        ratingS = ratingS.Replace(AllCharsSE.comma, AllCharsSE.dot);
+        ratingS = ratingS.Replace(AllChars.comma, AllChars.dot);
         if (float.TryParse(ratingS, out vr))
         {
             return vr;
