@@ -1,6 +1,6 @@
-﻿using System.Xml.Serialization;
+using System.Xml.Serialization;
 
-namespace SunamoBts._sunamo;
+namespace SunamoBts;
 internal class RHSE
 {
     public static string DumpAsXml(object output)

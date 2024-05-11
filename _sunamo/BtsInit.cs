@@ -1,4 +1,4 @@
-namespace SunamoBts._sunamo;
+namespace SunamoBts;
 
 //using System;
 //using System.Collections.Generic;

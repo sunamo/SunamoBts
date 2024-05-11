@@ -1,5 +1,5 @@
 
-namespace SunamoBts._sunamo;
+namespace SunamoBts;
 //namespace SunamoBts._sunamo;
 
 //internal class SHSH

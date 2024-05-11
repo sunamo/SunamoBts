@@ -1,4 +1,4 @@
-﻿namespace SunamoBts._sunamo;
+namespace SunamoBts;
 internal class SHSE
 {
     public static string NullToStringOrDefault(object n)
