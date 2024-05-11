@@ -449,7 +449,7 @@ public partial class BTS : BTSSE
     public static List<string> CastArrayObjectToString(Object[] args)
     {
         List<string> vr = new List<string>(args.Length);
-        CASE.InitFillWith(vr, args.Length);
+        CASunamoExceptions.InitFillWith(vr, args.Length);
         for (int i = 0; i < args.Length; i++)
         {
             vr[i] = args[i].ToString();
