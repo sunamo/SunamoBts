@@ -1,7 +1,7 @@
 namespace SunamoBts;
 internal class CASE
 {
-    public static bool IsListStringWrappedInArray<T>(List<T> v2)
+    internal static bool IsListStringWrappedInArray<T>(List<T> v2)
     {
         var first = v2.First().ToString();
         if (v2.Count == 1 && (first == "System.Collections.Generic.List`1[System.String]" ||
@@ -9,7 +9,7 @@ internal class CASE
 
         return false;
     }
-    public static void InitFillWith<T>(List<T> arr, int columns)
+    internal static void InitFillWith<T>(List<T> arr, int columns)
     {
         for (int i = 0; i < columns; i++)
         {

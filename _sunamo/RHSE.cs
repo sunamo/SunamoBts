@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 namespace SunamoBts;
 internal class RHSE
 {
-    public static string DumpAsXml(object output)
+    internal static string DumpAsXml(object output)
     {
         string objectAsXmlString;
 

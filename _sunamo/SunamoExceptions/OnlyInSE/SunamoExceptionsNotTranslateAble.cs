@@ -1,8 +1,8 @@
 namespace SunamoBts;
 
 
-public class SunamoExceptionsNotTranslateAble
+internal class SunamoExceptionsNotTranslateAble
 {
-    public const string NotImplementedCasePublicProgramErrorPleaseContactDeveloper =
-    "Not implemented case. public program error. Please contact developer";
+    internal const string NotImplementedCasePublicProgramErrorPleaseContactDeveloper =
+    "Not implemented case. internal program error. Please contact developer";
 }
