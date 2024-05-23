@@ -1,4 +1,4 @@
 namespace SunamoBts;
 
 
-internal delegate void VoidVoid();
+public delegate void VoidVoid();

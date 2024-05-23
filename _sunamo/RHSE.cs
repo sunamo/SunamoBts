@@ -1,9 +1,9 @@
 using System.Xml.Serialization;
 
 namespace SunamoBts;
-internal class RHSE
+public class RHSE
 {
-    internal static string DumpAsXml(object output)
+    public static string DumpAsXml(object output)
     {
         string objectAsXmlString;
 
