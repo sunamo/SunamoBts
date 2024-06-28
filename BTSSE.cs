@@ -1,10 +1,3 @@
-namespace
-#if SunamoDateTime
-SunamoDateTime
-#else
-SunamoBts
-#endif
-;
 
 public partial class BTSSE
 {
@@ -118,3 +111,4 @@ public partial class BTSSE
     }
     //        #endregion
 }
+
