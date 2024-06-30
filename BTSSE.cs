@@ -1,6 +1,6 @@
 namespace SunamoBts;
 
-public partial class BTSSE
+public class BTSSE
 {
     //        #region  from BTSShared64.cs
     public static int lastInt = -1;
