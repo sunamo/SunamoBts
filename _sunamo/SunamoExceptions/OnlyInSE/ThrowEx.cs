@@ -1,6 +1,3 @@
-
-using System.Reflection;
-
 namespace SunamoBts._sunamo.SunamoExceptions.OnlyInSE;
 internal class ThrowEx
 {
