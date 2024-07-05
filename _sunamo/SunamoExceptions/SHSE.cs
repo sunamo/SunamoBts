@@ -1,4 +1,4 @@
-namespace SunamoBts;
+namespace SunamoBts._sunamo.SunamoExceptions;
 internal class SHSE
 {
     internal static string NullToStringOrDefault(object n)

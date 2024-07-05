@@ -1,4 +1,4 @@
-namespace SunamoBts;
+namespace SunamoBts._sunamo.SunamoExceptions.OnlyInSE;
 
 
 internal class SunamoExceptionsNotTranslateAble
