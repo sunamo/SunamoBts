@@ -7,7 +7,7 @@ internal class SHSE
         return n == null ? " " + Consts.nulled : AllStrings.space + n;
     }
 
-    internal static List<string> Split(string s, params string[] dot)
+    internal static List<string> SplitMore(string s, params string[] dot)
     {
         return s.Split(dot, StringSplitOptions.RemoveEmptyEntries).ToList();
     }
@@ -19,7 +19,7 @@ internal class SHSE
         r = sb.ToString();
         return r;
     }
-    internal static List<string> SplitChar(string v1, params char[] v2)
+    internal static List<string> SplitCharMore(string v1, params char[] v2)
     {
         return v1.Split(v2).ToList();
     }
