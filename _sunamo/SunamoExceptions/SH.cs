@@ -1,17 +1,7 @@
-namespace SunamoBts._sunamo.SunamoExceptions;
+//namespace SunamoBts._sunamo.SunamoExceptions;
 
 internal class SH
 {
-    internal static string NullToStringOrDefault(object n)
-    {
-        //return NullToStringOrDefault(n, null);
-        return n == null ? " " + Consts.nulled : AllStrings.space + n;
-    }
-
-    internal static List<string> SplitMore(string s, params string[] dot)
-    {
-        return s.Split(dot, StringSplitOptions.RemoveEmptyEntries).ToList();
-    }
     internal static string JoinNL(List<string> l)
     {
         StringBuilder sb = new();
@@ -20,14 +10,28 @@ internal class SH
         r = sb.ToString();
         return r;
     }
-    internal static List<string> SplitCharMore(string v1, params char[] v2)
+    internal static List<string> SplitCharMore(string s, params char[] dot)
     {
-        return v1.Split(v2).ToList();
+        return s.Split(dot, StringSplitOptions.RemoveEmptyEntries).ToList();
+    }
+    internal static List<string> SplitMore(string s, params string[] dot)
+    {
+        return s.Split(dot, StringSplitOptions.RemoveEmptyEntries).ToList();
+    }
+    internal static List<string> SplitNone(string text, params string[] deli)
+    {
+        return text.Split(deli, StringSplitOptions.None).ToList();
+    }
+    internal static string NullToStringOrDefault(object n)
+    {
+
+        return n == null ? " " + Consts.nulled : AllStrings.space + n;
     }
     internal static string TrimEnd(string name, string ext)
     {
         while (name.EndsWith(ext)) return name.Substring(0, name.Length - ext.Length);
-
         return name;
     }
+
+
 }
