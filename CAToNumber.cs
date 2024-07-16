@@ -78,7 +78,7 @@ public class CAToNumber
     /// <param name="altitudes"></param>
     public static List<int> ToInt0(List<string> ts)
     {
-        //var ts = CASH.ToListStringIEnumerable2(enumerable);
+        //var ts = CA.ToListStringIEnumerable2(enumerable);
 
         for (int i = 0; i < ts.Count; i++)
         {
@@ -117,7 +117,7 @@ public class CAToNumber
                 continue;
             }
 
-            if (double.TryParse(item.ToString(), out var _) /*SHSH.IsNumber(item.ToString(), new Char[] { AllChars.comma, AllChars.dot, AllChars.dash })*/)
+            if (double.TryParse(item.ToString(), out var _) /*SH.IsNumber(item.ToString(), new Char[] { AllChars.comma, AllChars.dot, AllChars.dash })*/)
             {
                 var number = parse.Invoke(item.ToString());
 
