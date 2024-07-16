@@ -12,3 +12,4 @@ global using SunamoBts._sunamo.SunamoValues;
 global using SunamoBts._sunamo.SunamoExceptions.OnlyInSE;
 global using System.Diagnostics;
 global using System.Net;
+global using SunamoBts._sunamo.SunamoExceptions.InSunamoIsDerivedFrom;

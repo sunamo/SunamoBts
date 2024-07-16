@@ -1,4 +1,4 @@
-//namespace SunamoBts._sunamo.SunamoExceptions;
+namespace SunamoBts._sunamo.SunamoExceptions;
 
 internal class SH
 {
