@@ -550,7 +550,7 @@ public class BTS
     public static List<string> CastArrayObjectToString(Object[] args)
     {
         List<string> vr = new List<string>(args.Length);
-        CASunamoExceptions.InitFillWith(vr, args.Length);
+        CA.InitFillWith(vr, args.Length);
         for (int i = 0; i < args.Length; i++)
         {
             vr[i] = args[i].ToString();
