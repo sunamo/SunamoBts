@@ -39,7 +39,7 @@ public class BTS
         if (id == null) return false;
 
         Replace(ref id, replace);
-        return float.TryParse(id.Replace(AllStrings.comma, AllStrings.dot), out lastFloat);
+        return float.TryParse(id.Replace(",", "."), out lastFloat);
     }
 
     public static bool IsDouble(string id, bool replace = false)
@@ -47,7 +47,7 @@ public class BTS
         if (id == null) return false;
 
         Replace(ref id, replace);
-        return double.TryParse(id.Replace(AllStrings.comma, AllStrings.dot), out lastDouble);
+        return double.TryParse(id.Replace(",", "."), out lastDouble);
     }
 
 
@@ -327,7 +327,7 @@ public class BTS
     public static int ParseInt(string entry)
     {
         var lastInt2 = 0;
-        if (int.TryParse(entry.Replace(AllStrings.space, string.Empty), out lastInt2)) return lastInt2;
+        if (int.TryParse(entry.Replace("", string.Empty), out lastInt2)) return lastInt2;
         return int.MinValue;
     }
 
@@ -538,7 +538,7 @@ public class BTS
     {
         var vr = float.MinValue;
 
-        ratingS = ratingS.Replace(AllChars.comma, AllChars.dot);
+        ratingS = ratingS.Replace(',', '.');
         if (float.TryParse(ratingS, out vr)) return vr;
         return vr;
     }
@@ -861,8 +861,8 @@ public class BTS
         var hour = dateTime.Hour.ToString("D2");
         var minutes = dateTime.Minute.ToString("D2");
         var seconds = dateTime.Second.ToString("D2");
-        return day + AllStrings.dot + month + AllStrings.dot + year + AllStrings.space + hour + AllStrings.colon +
-               minutes + AllStrings.colon + seconds; // +AllStrings.colon + miliseconds;
+        return day + "." + month + "." + year + "" + hour + ":" +
+               minutes + ":" + seconds; // +":" + miliseconds;
     }
 
     public static string SameLenghtAllDates(DateTime dateTime)
@@ -871,8 +871,8 @@ public class BTS
         var month = dateTime.Month.ToString("D2");
         var day = dateTime.Day.ToString("D2");
         return
-            day + AllStrings.dot + month + AllStrings.dot +
-            year; // +AllStrings.space + hour + AllStrings.colon + minutes + AllStrings.colon + seconds;// +AllStrings.colon + miliseconds;
+            day + "." + month + "." +
+            year; // +"" + hour + ":" + minutes + ":" + seconds;// +":" + miliseconds;
     }
 
 
@@ -881,13 +881,13 @@ public class BTS
         var hour = dateTime.Hour.ToString("D2");
         var minutes = dateTime.Minute.ToString("D2");
         var seconds = dateTime.Second.ToString("D2");
-        return hour + AllStrings.colon + minutes + AllStrings.colon + seconds; // +AllStrings.colon + miliseconds;
+        return hour + ":" + minutes + ":" + seconds; // +":" + miliseconds;
     }
 
     public static string UsaDateTimeToString(DateTime d)
     {
-        return d.Month + AllStrings.slash + d.Day + AllStrings.slash + d.Year + AllStrings.space + d.Hour +
-               AllStrings.colon + d.Minute + AllStrings.colon + d.Second; // +AllStrings.colon + miliseconds;
+        return d.Month + "/" + d.Day + "/" + d.Year + "" + d.Hour +
+               ":" + d.Minute + ":" + d.Second; // +":" + miliseconds;
     }
 
     public static bool EqualDateWithoutTime(DateTime dt1, DateTime dt2)
