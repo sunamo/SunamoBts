@@ -1,7 +1,7 @@
 namespace SunamoBts._sunamo.SunamoExceptions;
-public partial class ThrowEx
+internal partial class ThrowEx
 {
-    public static bool BadFormatOfElementInList(
+    internal static bool BadFormatOfElementInList(
         object elVal,
         string listName,
         Func<object, string> SH_NullToStringOrDefault)
@@ -10,13 +10,13 @@ public partial class ThrowEx
             Exceptions.BadFormatOfElementInList(FullNameOfExecutedCode(), elVal, listName, SH_NullToStringOrDefault));
     }
 
-    public static bool IsNullOrEmpty(string argName, string argValue)
+    internal static bool IsNullOrEmpty(string argName, string argValue)
     { return ThrowIsNotNull(Exceptions.IsNullOrWhitespace(FullNameOfExecutedCode(), argName, argValue, true)); }
-    public static bool NotInt(string what, int? value)
+    internal static bool NotInt(string what, int? value)
     { return ThrowIsNotNull(Exceptions.NotInt(FullNameOfExecutedCode(), what, value)); }
 
     #region Other
-    public static string FullNameOfExecutedCode()
+    internal static string FullNameOfExecutedCode()
     {
         Tuple<string, string, string> placeOfExc = Exceptions.PlaceOfException();
         string f = FullNameOfExecutedCode(placeOfExc.Item1, placeOfExc.Item2, true);
@@ -57,7 +57,7 @@ public partial class ThrowEx
         return string.Concat(typeFullName, ".", methodName);
     }
 
-    public static bool ThrowIsNotNull(string? exception, bool reallyThrow = true)
+    internal static bool ThrowIsNotNull(string? exception, bool reallyThrow = true)
     {
         if (exception == null)
         {
