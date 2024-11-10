@@ -12,3 +12,6 @@ global using System.Reflection;
 global using System.Net;
 global using SunamoBts._sunamo;
 global using System.Diagnostics.CodeAnalysis;
+global using SunamoBts;
+global using SunamoBts._sunamo.SunamoParsing;
+global using SunamoBts._sunamo.SunamoValues;

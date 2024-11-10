@@ -327,7 +327,7 @@ public class BTS
     public static int ParseInt(string entry)
     {
         var lastInt2 = 0;
-        if (int.TryParse(entry.Replace("", string.Empty), out lastInt2)) return lastInt2;
+        if (int.TryParse(entry.Replace(" ", string.Empty), out lastInt2)) return lastInt2;
         return int.MinValue;
     }
 
