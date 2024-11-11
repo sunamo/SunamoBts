@@ -861,7 +861,7 @@ public class BTS
         var hour = dateTime.Hour.ToString("D2");
         var minutes = dateTime.Minute.ToString("D2");
         var seconds = dateTime.Second.ToString("D2");
-        return day + "." + month + "." + year + "" + hour + ":" +
+        return day + "." + month + "." + year + " " + hour + ":" +
                minutes + ":" + seconds; // +":" + miliseconds;
     }
 
@@ -886,7 +886,7 @@ public class BTS
 
     public static string UsaDateTimeToString(DateTime d)
     {
-        return d.Month + "/" + d.Day + "/" + d.Year + "" + d.Hour +
+        return d.Month + "/" + d.Day + "/" + d.Year + " " + d.Hour +
                ":" + d.Minute + ":" + d.Second; // +":" + miliseconds;
     }
 
