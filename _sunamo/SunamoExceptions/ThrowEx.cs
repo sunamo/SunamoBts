@@ -10,8 +10,6 @@ internal partial class ThrowEx
             Exceptions.BadFormatOfElementInList(FullNameOfExecutedCode(), elVal, listName, SH_NullToStringOrDefault));
     }
 
-    internal static bool IsNullOrEmpty(string argName, string argValue)
-    { return ThrowIsNotNull(Exceptions.IsNullOrWhitespace(FullNameOfExecutedCode(), argName, argValue, true)); }
     internal static bool NotInt(string what, int? value)
     { return ThrowIsNotNull(Exceptions.NotInt(FullNameOfExecutedCode(), what, value)); }
 
