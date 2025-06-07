@@ -371,7 +371,11 @@ public class BTS
         else
             vr = "No";
 
-        return vr.ToLower();
+        if (lower)
+        {
+            return vr.ToLower();
+        }
+        return vr;
     }
 
     public static object GetMinValueForType(Type idt)
@@ -680,7 +684,12 @@ public class BTS
         else
             vr = No;
 
-        return vr.ToLower();
+        if (lower)
+        {
+            return vr.ToLower();
+        }
+
+        return vr;
     }
 
     #endregion
@@ -903,11 +912,11 @@ public class BTS
     /// <param name="p"></param>
     /// <param name="max"></param>
     /// <param name="postfix"></param>
-    public static string[] GetNumberedListFromTo(int p, int max)
+    public static string[] GetNumberedListFromTo(int from, int max)
     {
         max++;
         var vr = new List<string>();
-        for (var i = 0; i < max; i++) vr.Add(i.ToString());
+        for (var i = from; i < max; i++) vr.Add(i.ToString());
         return vr.ToArray();
     }
 
