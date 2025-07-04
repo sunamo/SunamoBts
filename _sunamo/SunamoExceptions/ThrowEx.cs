@@ -54,7 +54,6 @@ internal partial class ThrowEx
         }
         return string.Concat(typeFullName, ".", methodName);
     }
-
     internal static bool ThrowIsNotNull(string? exception, bool reallyThrow = true)
     {
         if (exception != null)
