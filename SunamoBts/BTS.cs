@@ -167,7 +167,7 @@ public class BTS
         {
         }
 
-        // Zde jsem měl opačně znaménka, teď už by to mělo být správně
+        // Here I had opposite signs, now it should be correct
         return od <= value && to >= value;
     }
 

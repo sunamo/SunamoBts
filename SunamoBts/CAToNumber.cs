@@ -37,7 +37,7 @@ public class CAToNumber
     }
 
     /// <summary>
-    ///     Pokud A1 nebude mít délku A2 nebo prvek v A1 nebude vyparsovatelný na int, vrátí null
+    ///     If A1 does not have length A2 or element in A1 will not be parsable to int, returns null
     /// </summary>
     /// <param name="altitudes"></param>
     /// <param name="requiredLength"></param>
@@ -61,8 +61,8 @@ public class CAToNumber
     }
 
     /// <summary>
-    ///     Pokud potřebuješ vrátit null když něco nebude sedět, použij ToInt s parametry nebo ToIntMinRequiredLength
-    ///     Poslední číslo je počet parametrů navíc po seznamu stringů
+    ///     If you need to return null when something doesn't fit, use ToInt with parameters or ToIntMinRequiredLength
+    ///     The last number is count of additional parameters after list of strings
     /// </summary>
     /// <param name="altitudes"></param>
     public static List<int> ToInt0(List<string> ts)
@@ -116,7 +116,7 @@ public class CAToNumber
     }
 
     /// <summary>
-    ///     Pokud prvek v A1 nebude vyparsovatelný na int, vrátí null
+    ///     If element in A1 will not be parsable to int, returns null
     /// </summary>
     /// <param name="altitudes"></param>
     /// <param name="requiredLength"></param>
