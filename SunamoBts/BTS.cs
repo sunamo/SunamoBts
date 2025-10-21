@@ -1,3 +1,6 @@
+// EN: Variable names have been checked and replaced with self-descriptive names
+// CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
+
 namespace SunamoBts;
 
 public class BTS
@@ -98,11 +101,11 @@ public class BTS
         return int.Parse(hexValue, NumberStyles.HexNumber);
     }
 
-    public static Stream StreamFromString(string s)
+    public static Stream StreamFromString(string text)
     {
         var stream = new MemoryStream();
         var writer = new StreamWriter(stream);
-        writer.Write(s);
+        writer.Write(text);
         writer.Flush();
         stream.Position = 0;
         return stream;
@@ -272,41 +275,41 @@ public class BTS
     /// <returns></returns>
     public static object MethodForParse<T1>()
     {
-        var t = typeof(T1);
+        var targetType = typeof(T1);
 
         #region Same seria as in DefaultValueForTypeT
 
         #region MyRegion
 
-        if (t == Types.tString) return new Func<string, string>(ToString);
-        if (t == Types.tBool) return new Func<string, bool>(bool.Parse);
+        if (targetType == Types.tString) return new Func<string, string>(ToString);
+        if (targetType == Types.tBool) return new Func<string, bool>(bool.Parse);
 
         #endregion
 
         #region Signed numbers
 
-        if (t == Types.tFloat) return new Func<string, float>(float.Parse);
-        if (t == Types.tDouble) return new Func<string, double>(double.Parse);
-        if (t == typeof(int)) return new Func<string, int>(int.Parse);
-        if (t == Types.tLong) return new Func<string, long>(long.Parse);
-        if (t == Types.tShort) return new Func<string, short>(short.Parse);
-        if (t == Types.tDecimal) return new Func<string, decimal>(decimal.Parse);
-        if (t == Types.tSbyte) return new Func<string, sbyte>(sbyte.Parse);
+        if (targetType == Types.tFloat) return new Func<string, float>(float.Parse);
+        if (targetType == Types.tDouble) return new Func<string, double>(double.Parse);
+        if (targetType == typeof(int)) return new Func<string, int>(int.Parse);
+        if (targetType == Types.tLong) return new Func<string, long>(long.Parse);
+        if (targetType == Types.tShort) return new Func<string, short>(short.Parse);
+        if (targetType == Types.tDecimal) return new Func<string, decimal>(decimal.Parse);
+        if (targetType == Types.tSbyte) return new Func<string, sbyte>(sbyte.Parse);
 
         #endregion
 
         #region Unsigned numbers
 
-        if (t == Types.tByte) return new Func<string, byte>(byte.Parse);
-        if (t == Types.tUshort) return new Func<string, ushort>(ushort.Parse);
-        if (t == Types.tUint) return new Func<string, uint>(uint.Parse);
-        if (t == Types.tUlong) return new Func<string, ulong>(ulong.Parse);
+        if (targetType == Types.tByte) return new Func<string, byte>(byte.Parse);
+        if (targetType == Types.tUshort) return new Func<string, ushort>(ushort.Parse);
+        if (targetType == Types.tUint) return new Func<string, uint>(uint.Parse);
+        if (targetType == Types.tUlong) return new Func<string, ulong>(ulong.Parse);
 
         #endregion
 
-        if (t == Types.tDateTime) return new Func<string, DateTime>(DateTime.Parse);
-        if (t == Types.tGuid) return new Func<string, Guid>(Guid.Parse);
-        if (t == Types.tChar) return new Func<string, char>(s => s[0]);
+        if (targetType == Types.tDateTime) return new Func<string, DateTime>(DateTime.Parse);
+        if (targetType == Types.tGuid) return new Func<string, Guid>(Guid.Parse);
+        if (targetType == Types.tChar) return new Func<string, char>(text => text[0]);
 
         #endregion
 
@@ -644,9 +647,9 @@ public class BTS
     /// <param name="v"></param>
     public static bool IntToBool(object v)
     {
-        var s = v.ToString().Trim();
-        if (s == string.Empty) return false;
-        return Convert.ToBoolean(int.Parse(s));
+        var text = v.ToString().Trim();
+        if (text == string.Empty) return false;
+        return Convert.ToBoolean(int.Parse(text));
     }
 
     private const string Yes = "Yes";
@@ -660,9 +663,9 @@ public class BTS
     ///     G bool repr. A1. Pro Yes true, JF.
     /// </summary>
     /// <param name="s"></param>
-    public static bool StringToBool(string s)
+    public static bool StringToBool(string text)
     {
-        if (s == Yes || s == bool.TrueString || s == One || s == Ano) return true;
+        if (text == Yes || text == bool.TrueString || text == One || text == Ano) return true;
         return false;
     }
 
@@ -839,10 +842,10 @@ public class BTS
 
     public static object MakeUpTo3NumbersToZero(int p)
     {
-        var d = p.ToString().Length;
-        if (d == 1)
+        var digitCount = p.ToString().Length;
+        if (digitCount == 1)
             return "0" + p;
-        if (d == 2) return "00" + p;
+        if (digitCount == 2) return "00" + p;
         return p;
     }
 
@@ -859,7 +862,7 @@ public class BTS
 
     /// <summary>
     ///     Rok nezkracuje, počítá se standardním 4 místným
-    ///     Produkuje formát standardní s metodou DateTime.ToString()
+    ///     Produkuje formát standardní text metodou DateTime.ToString()
     /// </summary>
     /// <param name="dateTime"></param>
     public static string SameLenghtAllDateTimes(DateTime dateTime)

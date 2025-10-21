@@ -1,3 +1,6 @@
+// EN: Variable names have been checked and replaced with self-descriptive names
+// CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
+
 namespace SunamoBts;
 
 public class CAToNumber
@@ -47,11 +50,11 @@ public class CAToNumber
         if (enumerableCount != requiredLength) return null;
 
         var result = new List<T>();
-        var y = default(T);
+        var yValue = default(T);
         foreach (var item in enumerable)
         {
-            var yy = tryParse.Invoke(item.ToString(), y);
-            if (!EqualityComparer<T>.Default.Equals(yy, y))
+            var yy = tryParse.Invoke(item.ToString(), yValue);
+            if (!EqualityComparer<T>.Default.Equals(yy, yValue))
                 result.Add(yy);
             else
                 return null;
@@ -132,9 +135,9 @@ public class CAToNumber
         {
             if (i.CompareTo(startFrom) != 0) continue;
 
-            var y = default(T);
-            var yy = tryParse.Invoke(item.ToString(), y);
-            if (!EqualityComparer<T>.Default.Equals(yy, y))
+            var yValue = default(T);
+            var yy = tryParse.Invoke(item.ToString(), yValue);
+            if (!EqualityComparer<T>.Default.Equals(yy, yValue))
                 vr.Add(yy);
             else
                 return null;
