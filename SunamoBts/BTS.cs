@@ -11,7 +11,6 @@ public class BTS
     public static float lastFloat = -1;
     public static double lastDouble = -1;
 
-
     private static Type type = typeof(BTS);
 
     public static byte lastByte = 255;
@@ -19,38 +18,27 @@ public class BTS
 
     public static DateTime lastDateTime = DateTime.MinValue;
 
-    ///// <summary>
-    /////     Usage: Usage: Exceptions.ArrayElementContainsUnallowedStrings->SH.ContainsAny
-    ///// <typeparam name="T"></typeparam>
-    ///// <param name="c"></param>
-    ///// <param name="isChar"></param>
-    ///// <returns></returns>
-    //public static T CastToByT<T>(string c, bool isChar)
-    //{
-    //    return isChar ? (T)(dynamic)c.First() : (T)(dynamic)c;
-    //}
-
-    public static string Replace(ref string id, bool replaceCommaForDot)
+    public static string Replace(ref string value, bool replaceCommaForDot)
     {
-        if (replaceCommaForDot) id = id.Replace(",", ".");
+        if (replaceCommaForDot) value= value.Replace(",", ".");
 
-        return id;
+        return value;
     }
 
-    public static bool IsFloat(string id, bool replace = false)
+    public static bool IsFloat(string value, bool replaceCommaForDot = false)
     {
-        if (id == null) return false;
+        if (value== null) return false;
 
-        Replace(ref id, replace);
-        return float.TryParse(id.Replace(",", "."), out lastFloat);
+        Replace(ref value, replaceCommaForDot);
+        return float.TryParse(value.Replace(",", "."), out lastFloat);
     }
 
-    public static bool IsDouble(string id, bool replace = false)
+    public static bool IsDouble(string value, bool replaceCommaForDot = false)
     {
-        if (id == null) return false;
+        if (value== null) return false;
 
-        Replace(ref id, replace);
-        return double.TryParse(id.Replace(",", "."), out lastDouble);
+        Replace(ref value, replaceCommaForDot);
+        return double.TryParse(value.Replace(",", "."), out lastDouble);
     }
 
 
@@ -61,37 +49,35 @@ public class BTS
     /// <param name="excIfIsFloat"></param>
     /// <param name="replaceCommaForDot"></param>
     /// <returns></returns>
-    public static bool IsInt(string id, bool excIfIsFloat = false, bool replaceCommaForDot = false)
+    public static bool IsInt(string value, bool excIfIsFloat = false, bool replaceCommaForDot = false)
     {
-        if (id == null) return false;
+        if (value== null) return false;
+        value= value.Replace(" ", "");
+        Replace(ref value, replaceCommaForDot);
 
-        id = id.Replace(" ", "");
-        Replace(ref id, replaceCommaForDot);
 
-
-        var vr = int.TryParse(id, out lastInt);
-        if (!vr)
-            if (IsFloat(id))
+        var result= int.TryParse(value, out lastInt);
+        if (!result)
+            if (IsFloat(value))
                 if (excIfIsFloat)
-                    throw new Exception(id + " is float but is calling IsInt");
+                    throw new Exception(value+ " is float but is calling IsInt");
 
-        return vr;
+        return result;
     }
 
-    public static bool IsLong(string id, bool excIfIsDouble = false, bool replaceCommaForDot = false)
+    public static bool IsLong(string value, bool excIfIsDouble = false, bool replaceCommaForDot = false)
     {
-        if (id == null) return false;
+        if (value== null) return false;
+value= value.Replace(" ", ""); //SHReplace.ReplaceAll4(, "", " ");
+        Replace(ref value, replaceCommaForDot);
 
-        id = id.Replace(" ", ""); //SHReplace.ReplaceAll4(, "", " ");
-        Replace(ref id, replaceCommaForDot);
-
-        var vr = long.TryParse(id, out lastLong);
-        if (!vr)
-            if (IsDouble(id))
+        var result= long.TryParse(value, out lastLong);
+        if (!result)
+            if (IsDouble(value))
                 if (excIfIsDouble)
-                    throw new Exception(id + " is float but is calling IsInt");
+                    throw new Exception(value+ " is float but is calling IsInt");
 
-        return vr;
+        return result;
     }
     //        #endregion
 
@@ -121,9 +107,9 @@ public class BTS
 
     #region Parse*
 
-    public static bool TryParseBool(string trim)
+    public static bool TryParseBool(string value)
     {
-        return bool.TryParse(trim, out lastBool);
+        return bool.TryParse(value, out lastBool);
     }
 
     #endregion
@@ -132,19 +118,19 @@ public class BTS
     /// <summary>
     ///     Check for null in A2
     /// </summary>
-    /// <param name="tag2"></param>
-    /// <param name="tag"></param>
-    public static bool CompareAsObjectAndString(object tag2, object tag)
+    /// <param name="firstObject"></param>
+    /// <param name="secondObject"></param>
+    public static bool CompareAsObjectAndString(object firstObject, object secondObject)
     {
-        var same = false;
-        if (tag2 != null)
+        var areEqual= false;
+        if (firstObject!= null)
         {
-            if (tag == tag2)
-                same = true;
-            else if (tag.ToString() == tag2.ToString()) same = true;
+            if (secondObject== firstObject)
+areEqual= true;
+            else if (secondObject.ToString() == firstObject.ToString()) areEqual= true;
         }
 
-        return same;
+        return areEqual;
     }
 
     /// <summary>
@@ -152,10 +138,10 @@ public class BTS
     /// </summary>
     /// <param name="hodnota"></param>
     /// <param name="paramy"></param>
-    public static bool IsAllEquals(bool hodnota, params bool[] paramy)
+    public static bool IsAllEquals(bool value, params bool[] values)
     {
-        for (var i = 0; i < paramy.Length; i++)
-            if (hodnota != paramy[i])
+        for (var i = 0; i < values.Length; i++)
+            if (value!= values[i])
                 return false;
         return true;
     }
@@ -164,65 +150,65 @@ public class BTS
     /// <param name="od"></param>
     /// <param name="to"></param>
     /// <param name="value"></param>
-    public static bool IsInRange(int od, int to, int value)
+    public static bool IsInRange(int from, int to, int value)
     {
-        if (value == 100)
+        if (value== 100)
         {
         }
 
         // Here I had opposite signs, now it should be correct
-        return od <= value && to >= value;
+        return from<= value&& to >= value;
     }
 
 
-    public static bool Is(bool binFp, bool n)
+    public static bool Is(bool value, bool negate)
     {
-        if (n) return !binFp;
-        return binFp;
+        if (negate) return !value;
+        return value;
     }
 
     public static List<string> GetOnlyNonNullValues(params string[] args)
     {
-        var vr = new List<string>();
+        var result= new List<string>();
         for (var i = 0; i < args.Length; i++)
         {
             var text = args[i];
-            object hodnota = args[++i];
-            if (hodnota != null)
+            object value= args[++i];
+            if (value!= null)
             {
-                vr.Add(text);
-                vr.Add(hodnota.ToString());
+result.Add(text);
+result.Add(value.ToString());
             }
         }
 
-        return vr;
+        return result;
     }
 
     #region Get*ValueForType
 
-    public static object GetMaxValueForType(Type id)
+    public static object GetMaxValueForType(Type type)
     {
-        if (id == typeof(byte))
+        if (type== typeof(byte))
             return byte.MaxValue;
-        if (id == typeof(decimal))
+        if (type== typeof(decimal))
             return decimal.MaxValue;
-        if (id == typeof(double))
+        if (type== typeof(double))
             return double.MaxValue;
-        if (id == typeof(short))
+        if (type== typeof(short))
             return short.MaxValue;
-        if (id == typeof(int))
+        if (type== typeof(int))
             return int.MaxValue;
-        if (id == typeof(long))
+        if (type== typeof(long))
             return long.MaxValue;
-        if (id == typeof(float))
+        if (type== typeof(float))
             return float.MaxValue;
-        if (id == typeof(sbyte))
+        if (type== typeof(sbyte))
             return sbyte.MaxValue;
-        if (id == typeof(ushort))
+        if (type== typeof(ushort))
             return ushort.MaxValue;
-        if (id == typeof(uint))
+        if (type== typeof(uint))
             return uint.MaxValue;
-        if (id == typeof(ulong)) return ulong.MaxValue;
+        if (type== typeof(ulong)) return ulong.MaxValue;
         throw new Exception("Nepovolen\u00FD nehodnotov\u00FD typ v metod\u011B GetMaxValueForType");
         return 0;
     }
@@ -233,18 +219,18 @@ public class BTS
     public static List<byte> ClearEndingsBytes(List<byte> plainTextBytes)
     {
         var bytes = new List<byte>();
-        var pridavat = false;
+        var shouldAdd= false;
         for (var i = plainTextBytes.Count - 1; i >= 0; i--)
-            if (!pridavat && plainTextBytes[i] != 0)
+            if (!shouldAdd&& plainTextBytes[i] != 0)
             {
-                pridavat = true;
-                var pridat = plainTextBytes[i];
-                bytes.Insert(0, pridat);
+shouldAdd= true;
+                var byteToAdd= plainTextBytes[i];
+                bytes.Insert(0, byteToAdd);
             }
-            else if (pridavat)
+            else if (shouldAdd)
             {
-                var pridat = plainTextBytes[i];
-                bytes.Insert(0, pridat);
+                var byteToAdd= plainTextBytes[i];
+                bytes.Insert(0, byteToAdd);
             }
 
         if (bytes.Count == 0)
@@ -256,16 +242,16 @@ public class BTS
         return bytes;
     }
 
-    public static int? ParseIntNull(string v)
+    public static int? ParseIntNull(string value)
     {
-        if (int.TryParse(v, out lastInt)) return lastInt;
+        if (int.TryParse(value, out lastInt)) return lastInt;
 
         return null;
     }
 
-    public static string ToString<T>(T t)
+    public static string ToString<T>(T value)
     {
-        return t.ToString();
+        return value.ToString();
     }
 
     /// <summary>
@@ -316,10 +302,10 @@ public class BTS
         return null;
     }
 
-    public static bool IsDateTime(string dt)
+    public static bool IsDateTime(string value)
     {
-        if (dt == null) return false;
-        return DateTime.TryParse(dt, out lastDateTime);
+        if (value== null) return false;
+        return DateTime.TryParse(value, out lastDateTime);
     }
 
     /// <summary>
@@ -334,10 +320,10 @@ public class BTS
         return int.MinValue;
     }
 
-    public static bool IsBool(string trim)
+    public static bool IsBool(string value)
     {
-        if (trim == null) return false;
-        return bool.TryParse(trim, out lastBool);
+        if (value== null) return false;
+        return bool.TryParse(value, out lastBool);
     }
 
     public static byte ParseByte(string entry)
@@ -352,52 +338,52 @@ public class BTS
         return ParseShort(entry, short.MinValue);
     }
 
-    public static short ParseShort(string entry, short defVal)
+    public static short ParseShort(string entry, short defaultValue)
     {
         short lastInt2 = 0;
         if (short.TryParse(entry, out lastInt2)) return lastInt2;
-        return defVal;
+        return defaultValue;
     }
 
-    public static int? ParseInt(string entry, int? _default)
+    public static int? ParseInt(string entry, int? defaultValue)
     {
         var lastInt2 = 0;
         if (int.TryParse(entry, out lastInt2)) return lastInt2;
-        return _default;
+        return defaultValue;
     }
 
-    public static string BoolToStringEn(bool p, bool lower = false)
+    public static string BoolToStringEn(bool value, bool toLower = false)
     {
-        string vr = null;
-        if (p)
-            vr = "Yes";
+        string result= null;
+        if (value)
+result= "Yes";
         else
-            vr = "No";
+result= "No";
 
-        if (lower)
+        if (toLower)
         {
-            return vr.ToLower();
+            return result.ToLower();
         }
-        return vr;
+        return result;
     }
 
-    public static object GetMinValueForType(Type idt)
+    public static object GetMinValueForType(Type type)
     {
-        if (idt == typeof(byte))
+        if (type== typeof(byte))
             return 1;
-        if (idt == typeof(short))
+        if (type== typeof(short))
             return short.MinValue;
-        if (idt == typeof(int))
+        if (type== typeof(int))
             return int.MinValue;
-        if (idt == typeof(long))
+        if (type== typeof(long))
             return long.MinValue;
-        if (idt == typeof(sbyte))
+        if (type== typeof(sbyte))
             return sbyte.MinValue;
-        if (idt == typeof(ushort))
+        if (type== typeof(ushort))
             return ushort.MinValue;
-        if (idt == typeof(uint))
+        if (type== typeof(uint))
             return uint.MinValue;
-        if (idt == typeof(ulong)) return ulong.MinValue;
+        if (type== typeof(ulong)) return ulong.MinValue;
         throw new Exception("Nepovolen\u00FD nehodnotov\u00FD typ v metod\u011B GetMinValueForType");
         return null;
     }
@@ -405,28 +391,28 @@ public class BTS
     /// <summary>
     ///     If has value true, return true. Otherwise return false
     /// </summary>
-    /// <param name="t"></param>
-    public static bool GetValueOfNullable(bool? t)
+    /// <param name="value"></param>
+    public static bool GetValueOfNullable(bool? value)
     {
-        if (t.HasValue) return t.Value;
+        if (value.HasValue) return value.Value;
         return false;
     }
 
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool Invert(bool b, bool really)
+    public static bool Invert(bool value, bool shouldInvert)
     {
-        if (really) return !b;
-        return b;
+        if (shouldInvert) return !value;
+        return value;
     }
 
     #region For easy copy from BTSShared64.cs
 
-    public static T CastToByT<T>(string c, bool isChar)
+    public static T CastToByT<T>(string text, bool isChar)
     {
         if (isChar)
-            return (T)(dynamic)c.First();
-        return (T)(dynamic)c;
+            return (T)(dynamic)text.First();
+        return (T)(dynamic)text;
     }
 
     //private static string Replace(ref string id, bool replace)
@@ -454,11 +440,11 @@ public class BTS
     /// <param name="v"></param>
     /// <param name="ciForParse"></param>
     /// <param name="defaultValue"></param>
-    public static DateTime TryParseDateTime(string v, CultureInfo ciForParse, DateTime defaultValue)
+    public static DateTime TryParseDateTime(string value, CultureInfo cultureInfo, DateTime defaultValue)
     {
-        var vr = defaultValue;
+        var result= defaultValue;
 
-        if (DateTime.TryParse(v, ciForParse, DateTimeStyles.None, out vr)) return vr;
+        if (DateTime.TryParse(value, cultureInfo, DateTimeStyles.None, out result)) return result;
         return defaultValue;
     }
 
@@ -476,11 +462,11 @@ public class BTS
         return false;
     }
 
-    public static byte TryParseByte(string p1, byte _def)
+    public static byte TryParseByte(string entry, byte defaultValue)
     {
-        var vr = _def;
-        if (byte.TryParse(p1, out vr)) return vr;
-        return _def;
+        var result= defaultValue;
+        if (byte.TryParse(entry, out result)) return result;
+        return defaultValue;
     }
 
 
@@ -489,75 +475,74 @@ public class BTS
     /// </summary>
     /// <param name="p"></param>
     /// <param name="_default"></param>
-    public static bool TryParseBool(string p, bool _default)
+    public static bool TryParseBool(string value, bool defaultValue)
     {
-        var vr = _default;
+        var result= defaultValue;
 
-        if (bool.TryParse(p, out vr)) return vr;
-        return _default;
+        if (bool.TryParse(value, out result)) return result;
+        return defaultValue;
     }
 
-    public static int TryParseIntCheckNull(string entry, int def)
+    public static int TryParseIntCheckNull(string entry, int defaultValue)
     {
         var lastInt = 0;
         if (entry == null) return lastInt;
         if (int.TryParse(entry, out lastInt)) return lastInt;
-        return def;
+        return defaultValue;
     }
 
-    public static int TryParseInt(string entry, int def)
+    public static int TryParseInt(string entry, int defaultValue)
     {
-        return TryParseInt(entry, def, false);
+        return TryParseInt(entry, defaultValue, false);
     }
 
-    public static int TryParseInt(string entry, int def, bool throwEx)
+    public static int TryParseInt(string entry, int defaultValue, bool throwException)
     {
         var lastInt = 0;
         if (int.TryParse(entry, out lastInt)) return lastInt;
 
-        if (throwEx) ThrowEx.NotInt(entry, null);
-        return def;
+        if (throwException) ThrowEx.NotInt(entry, null);
+        return defaultValue;
     }
 
     #endregion
 
     #region int <> bool
 
-    public static int BoolToInt(bool v)
+    public static int BoolToInt(bool value)
     {
-        return Convert.ToInt32(v);
+        return Convert.ToInt32(value);
     }
 
     /// <summary>
     ///     0 - false, all other - 1
     /// </summary>
     /// <param name="v"></param>
-    public static bool IntToBool(int v)
+    public static bool IntToBool(int value)
     {
-        return Convert.ToBoolean(v);
+        return Convert.ToBoolean(value);
     }
 
     #endregion
 
     #region Parse*
 
-    public static float ParseFloat(string ratingS)
+    public static float ParseFloat(string value)
     {
-        var vr = float.MinValue;
-
-        ratingS = ratingS.Replace(',', '.');
-        if (float.TryParse(ratingS, out vr)) return vr;
-        return vr;
+        var result= float.MinValue;
+value= value.Replace(',', '.');
+        if (float.TryParse(value, out result)) return result;
+        return result;
     }
 
     /// <summary>
     ///     Vrátí false v případě že se nepodaří vyparsovat
     /// </summary>
     /// <param name="displayAnchors"></param>
-    public static bool ParseBool(string displayAnchors)
+    public static bool ParseBool(string value)
     {
-        var vr = false;
-        if (bool.TryParse(displayAnchors, out vr)) return vr;
+        var result= false;
+        if (bool.TryParse(value, out result)) return result;
         return false;
     }
 
@@ -565,24 +550,24 @@ public class BTS
     ///     Vrátí A2 v případě že se nepodaří vyparsovat
     /// </summary>
     /// <param name="displayAnchors"></param>
-    public static bool ParseBool(string displayAnchors, bool def)
+    public static bool ParseBool(string value, bool defaultValue)
     {
-        var vr = false;
-        if (bool.TryParse(displayAnchors, out vr)) return vr;
-        return def;
+        var result= false;
+        if (bool.TryParse(value, out result)) return result;
+        return defaultValue;
     }
 
     public static int ParseInt(string entry, bool mustBeAllNumbers)
     {
-        int d;
-        if (!int.TryParse(entry, out d))
+        int result;
+        if (!int.TryParse(entry, out result))
             if (mustBeAllNumbers)
                 return int.MinValue;
 
-        return d;
+        return result;
     }
 
-    public static double ParseDouble(string entry, double _default)
+    public static double ParseDouble(string entry, double defaultValue)
     {
         //entry = SH.FromSpace160To32(entry);
         entry = entry.Replace(" ", string.Empty);
@@ -590,10 +575,10 @@ public class BTS
 
         double lastDouble2 = 0;
         if (double.TryParse(entry, out lastDouble2)) return lastDouble2;
-        return _default;
+        return defaultValue;
     }
 
-    public static int ParseInt(string entry, int _default)
+    public static int ParseInt(string entry, int defaultValue)
     {
         //entry = SH.FromSpace160To32(entry);
         entry = entry.Replace(" ", string.Empty);
@@ -601,40 +586,40 @@ public class BTS
 
         var lastInt2 = 0;
         if (int.TryParse(entry, out lastInt2)) return lastInt2;
-        return _default;
+        return defaultValue;
     }
 
 
-    public static byte ParseByte(string entry, byte def)
+    public static byte ParseByte(string entry, byte defaultValue)
     {
         byte lastInt2 = 0;
         if (byte.TryParse(entry, out lastInt2)) return lastInt2;
-        return def;
+        return defaultValue;
     }
 
     #endregion
 
     #region Is*
 
-    public static bool IsByte(string f)
+    public static bool IsByte(string value)
     {
-        if (f == null) return false;
-        return byte.TryParse(f, out lastByte);
+        if (value== null) return false;
+        return byte.TryParse(value, out lastByte);
     }
 
 
-    public static bool IsByte(string id, out byte b)
+    public static bool IsByte(string value, out byte result)
     {
-        if (id == null)
+        if (value== null)
         {
-            b = 0;
+            result= 0;
             return false;
         }
 
         //byte b2 = 0;
-        var vr = byte.TryParse(id, out b);
+        var parseResult= byte.TryParse(value, out result);
         //b = b2;
-        return vr;
+        return parseResult;
     }
 
     #endregion
@@ -645,9 +630,9 @@ public class BTS
     ///     0 - false, all other - 1
     /// </summary>
     /// <param name="v"></param>
-    public static bool IntToBool(object v)
+    public static bool IntToBool(object value)
     {
-        var text = v.ToString().Trim();
+        var text = value.ToString().Trim();
         if (text == string.Empty) return false;
         return Convert.ToBoolean(int.Parse(text));
     }
@@ -673,46 +658,46 @@ public class BTS
     ///     G str rep. pro A1 - Ano/Ne
     /// </summary>
     /// <param name="v"></param>
-    public static string BoolToString(bool p)
+    public static string BoolToString(bool value)
     {
-        if (p) return Ano;
+        if (value) return Ano;
         return Ne;
     }
 
-    public static string BoolToString(bool p, bool lower = false)
+    public static string BoolToString(bool value, bool toLower = false)
     {
-        string vr = null;
-        if (p)
-            vr = Yes;
+        string result= null;
+        if (value)
+result= Yes;
         else
-            vr = No;
+result= No;
 
-        if (lower)
+        if (toLower)
         {
-            return vr.ToLower();
+            return result.ToLower();
         }
 
-        return vr;
+        return result;
     }
 
     #endregion
 
     #region byte[] <> string
 
-    public static List<byte> ConvertFromUtf8ToBytes(string vstup)
+    public static List<byte> ConvertFromUtf8ToBytes(string text)
     {
-        return Encoding.UTF8.GetBytes(vstup).ToList();
+        return Encoding.UTF8.GetBytes(text).ToList();
     }
 
-    public static string ConvertFromBytesToUtf8(List<byte> bajty)
+    public static string ConvertFromBytesToUtf8(List<byte> bytes)
     {
         //NH.RemoveEndingZeroPadding(bajty);
-        return Encoding.UTF8.GetString(bajty.ToArray());
+        return Encoding.UTF8.GetString(bytes.ToArray());
     }
 
-    public static bool FalseOrNull(object get)
+    public static bool FalseOrNull(object value)
     {
-        return get == null || get.ToString() == false.ToString();
+        return value== null || value.ToString() == false.ToString();
     }
 
     #endregion
@@ -721,71 +706,26 @@ public class BTS
 
     public static List<string> CastArrayObjectToString(object[] args)
     {
-        var vr = new List<string>(args.Length);
+        var result= new List<string>(args.Length);
         //CA.InitFillWith(vr, args.Length);
-        for (var i = 0; i < args.Length; i++) vr[i] = args[i].ToString();
-        return vr;
+        for (var i = 0; i < args.Length; i++) result[i] = args[i].ToString();
+        return result;
     }
 
-    public static List<string> CastArrayIntToString(int[] args)
+    public static List<string> CastArrayIntToString(int[] numbers)
     {
-        var vr = new List<string>(args.Length);
-        for (var i = 0; i < args.Length; i++) vr[i] = args[i].ToString();
-        return vr;
+        var result= new List<string>(numbers.Length);
+        for (var i = 0; i < numbers.Length; i++) result[i] = numbers[i].ToString();
+        return result;
     }
-
-    #endregion
-
-    #region Castint to Array - commented, its in used only List
-
-    //public static int[] CastArrayStringToInt(List<string> plemena)
-    //    {
-    //        int[] vr = new int[plemena.Length];
-    //        for (int i = 0; i < plemena.Length; i++)
-    //        {
-    //            vr[i] = int.Parse(plemena[i]);
-    //        }
-    //        return vr;
-    //    }
-
-    //    public static short[] CastArrayStringToShort(List<string> plemena)
-    //    {
-    //        short[] vr = new short[plemena.Count];
-    //        for (int i = 0; i < plemena.Count; i++)
-    //        {
-    //            vr[i] = short.Parse(plemena[i]);
-    //        }
-    //        return vr;
-    //    }
-
-    //    public static List<string> CastArrayObjectToString(string[] args)
-    //    {
-    //        List<string> vr = new string[args.Length];
-    //        for (int i = 0; i < args.Length; i++)
-    //        {
-    //            vr[i] = args[i].ToString();
-    //        }
-    //        return vr;
-    //    }
-
-
-    //public static List<string> CastArrayIntToString(int[] args)
-    //    {
-    //        List<string> vr = new string[args.Length];
-    //        for (int i = 0; i < args.Length; i++)
-    //        {
-    //            vr[i] = args[i].ToString();
-    //        }
-    //        return vr;
-    //    }
 
     #endregion
 
     #region Casting to List
 
-    public static List<int> CastToIntList<U>(IList<U> d)
+    public static List<int> CastToIntList<U>(IList<U> list)
     {
-        return CAToNumber.ToNumber(int.Parse, d);
+        return CAToNumber.ToNumber(int.Parse, list);
     }
 
 
@@ -793,66 +733,66 @@ public class BTS
     ///     Pokud se cokoliv nepodaří přetypovat, vyhodí výjimku
     ///     Before use you can call RemoveNotNumber to avoid raise exception
     /// </summary>
-    /// <param name="p"></param>
-    public static List<int> CastCollectionStringToInt(IList<string> p)
+    /// <param name="collection"></param>
+    public static List<int> CastCollectionStringToInt(IList<string> collection)
     {
-        return CAToNumber.ToNumber(int.Parse, p);
+        return CAToNumber.ToNumber(int.Parse, collection);
     }
 
     /// <summary>
     ///     Direct edit
     /// </summary>
-    /// <param name="input"></param>
-    public static void RemoveNotNumber(IList input)
+    /// <param name="list"></param>
+    public static void RemoveNotNumber(IList list)
     {
-        for (var i = input.Count - 1; i >= 0; i--)
-            if (!double.TryParse(input[i].ToString(), out var _))
-                input.RemoveAt(i);
+        for (var i = list.Count - 1; i >= 0; i--)
+            if (!double.TryParse(list[i].ToString(), out var _))
+                list.RemoveAt(i);
     }
 
     /// <summary>
     ///     Before use you can call RemoveNotNumber to avoid raise exception
     /// </summary>
-    /// <param name="n"></param>
-    public static List<int> CastCollectionShortToInt(List<short> n)
+    /// <param name="numbers"></param>
+    public static List<int> CastCollectionShortToInt(List<short> numbers)
     {
-        var vr = new List<int>();
-        for (var i = 0; i < n.Count; i++) vr.Add(n[i]);
-        return vr;
+        var result= new List<int>();
+        for (var i = 0; i < numbers.Count; i++) result.Add(numbers[i]);
+        return result;
     }
 
-    public static List<short> CastCollectionIntToShort(List<int> n)
+    public static List<short> CastCollectionIntToShort(List<int> numbers)
     {
-        var vr = new List<short>(n.Count);
-        for (var i = 0; i < n.Count; i++) vr.Add((short)n[i]);
-        return vr;
+        var result= new List<short>(numbers.Count);
+        for (var i = 0; i < numbers.Count; i++) result.Add((short)numbers[i]);
+        return result;
     }
 
     /// <summary>
     ///     Before use you can call RemoveNotNumber to avoid raise exception
     /// </summary>
-    public static List<int> CastListShortToListInt(List<short> n)
+    public static List<int> CastListShortToListInt(List<short> numbers)
     {
-        return CastCollectionShortToInt(n);
+        return CastCollectionShortToInt(numbers);
     }
 
     #endregion
 
     #region MakeUpTo*NumbersToZero
 
-    public static object MakeUpTo3NumbersToZero(int p)
+    public static object MakeUpTo3NumbersToZero(int number)
     {
-        var digitCount = p.ToString().Length;
+        var digitCount = number.ToString().Length;
         if (digitCount == 1)
-            return "0" + p;
-        if (digitCount == 2) return "00" + p;
-        return p;
+            return "0" + number;
+        if (digitCount == 2) return "00" + number;
+        return number;
     }
 
-    public static object MakeUpTo2NumbersToZero(int p)
+    public static object MakeUpTo2NumbersToZero(int number)
     {
-        if (p.ToString().Length == 1) return "0" + p;
-        return p;
+        if (number.ToString().Length == 1) return "0" + number;
+        return number;
     }
 
     #endregion
@@ -896,15 +836,15 @@ public class BTS
         return hour + ":" + minutes + ":" + seconds; // +":" + miliseconds;
     }
 
-    public static string UsaDateTimeToString(DateTime d)
+    public static string UsaDateTimeToString(DateTime dateTime)
     {
-        return d.Month + "/" + d.Day + "/" + d.Year + " " + d.Hour +
-               ":" + d.Minute + ":" + d.Second; // +":" + miliseconds;
+        return dateTime.Month + "/" + dateTime.Day + "/" + dateTime.Year + " " + dateTime.Hour +
+               ":" + dateTime.Minute + ":" + dateTime.Second; // +":" + miliseconds;
     }
 
-    public static bool EqualDateWithoutTime(DateTime dt1, DateTime dt2)
+    public static bool EqualDateWithoutTime(DateTime firstDateTime, DateTime secondDateTime)
     {
-        if (dt1.Day == dt2.Day && dt1.Month == dt2.Month && dt1.Year == dt2.Year) return true;
+        if (firstDateTime.Day == secondDateTime.Day && firstDateTime.Month == secondDateTime.Month && firstDateTime.Year == secondDateTime.Year) return true;
         return false;
     }
 
@@ -918,26 +858,18 @@ public class BTS
     public static string[] GetNumberedListFromTo(int from, int max)
     {
         max++;
-        var vr = new List<string>();
-        for (var i = from; i < max; i++) vr.Add(i.ToString());
-        return vr.ToArray();
+        var result= new List<string>();
+        for (var i = from; i < max; i++) result.Add(i.ToString());
+        return result.ToArray();
     }
 
-    public static List<string> GetNumberedListFromTo(int p, int max, string postfix = ". ")
+    public static List<string> GetNumberedListFromTo(int start, int max, string postfix = ". ")
     {
         max++;
-        max += p;
-        var vr = new List<string>();
-        for (var i = p; i < max; i++) vr.Add(i + postfix);
-        return vr;
-    }
-
-    private static List<string> GetNumberedListFromToList(int p, int indexOdNext)
-    {
-        var vr = new List<string>();
-        var o = GetNumberedListFromTo(p, indexOdNext);
-        foreach (object item in o) vr.Add(item.ToString());
-        return vr;
+        max += start;
+        var result= new List<string>();
+        for (var i = start; i < max; i++) result.Add(i + postfix);
+        return result;
     }
 
     #endregion

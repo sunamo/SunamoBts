@@ -43,15 +43,15 @@ bool fillAlsoFirstTwo = true)
     {
         var s2 = line.Split("at ")[1].Trim();
         var text = s2.Split("(")[0];
-        var parameter = text.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-        methodName = parameter[^1];
-        parameter.RemoveAt(parameter.Count - 1);
-        type = string.Join(".", parameter);
+        var parts= text.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+        methodName = parts[^1];
+parts.RemoveAt(parts.Count - 1);
+        type = string.Join(".", parts);
     }
-    internal static string CallingMethod(int v = 1)
+    internal static string CallingMethod(int depth= 1)
     {
         StackTrace stackTrace = new();
-        var methodBase = stackTrace.GetFrame(v)?.GetMethod();
+        var methodBase = stackTrace.GetFrame(depth)?.GetMethod();
         if (methodBase == null)
         {
             return "Method name cannot be get";
@@ -73,8 +73,8 @@ bool fillAlsoFirstTwo = true)
         " in list " + listName;
     }
     #endregion
-    internal static string? NotInt(string before, string what, int? value)
+    internal static string? NotInt(string before, string what, int? depth)
     {
-        return !value.HasValue ? CheckBefore(before) + what + " is not with value " + value + " valid integer number" : null;
+        return !depth.HasValue ? CheckBefore(before) + what + " is not with value " + depth+ " valid integer number" : null;
     }
 }

@@ -3,9 +3,9 @@
 namespace SunamoBts._sunamo;
 internal class SH
 {
-    internal static string NullToStringOrDefault(object n)
+    internal static string NullToStringOrDefault(object number)
     {
 
-        return n == null ? " " + "(null)" : " " + n;
+        return number== null ? " " + "(null)" : " " + number;
     }
 }
