@@ -130,10 +130,10 @@ values[i] = values[i].Substring(0, values[i].IndexOf('.') + 1);
         if (finalLength < requiredLength) return null;
         var result= new List<T>(finalLength);
 
-        var i = default(T);
+        var currentIndex = default(T);
         foreach (var item in list)
         {
-            if (i.CompareTo(startFrom) != 0) continue;
+            if (currentIndex.CompareTo(startFrom) != 0) continue;
 
             var defaultValue= default(T);
             var parsedValue= parseMethod.Invoke(item.ToString(), defaultValue);

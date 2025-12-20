@@ -41,8 +41,8 @@ bool fillAlsoFirstTwo = true)
     }
     internal static void TypeAndMethodName(string line, out string type, out string methodName)
     {
-        var s2 = line.Split("at ")[1].Trim();
-        var text = s2.Split("(")[0];
+        var contentAfterAt = line.Split("at ")[1].Trim();
+        var text = contentAfterAt.Split("(")[0];
         var parts= text.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
         methodName = parts[^1];
 parts.RemoveAt(parts.Count - 1);
