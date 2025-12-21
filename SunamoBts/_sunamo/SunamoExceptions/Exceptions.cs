@@ -1,7 +1,5 @@
-// EN: Variable names have been checked and replaced with self-descriptive names
-// CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
-
 namespace SunamoBts._sunamo.SunamoExceptions;
+
 // © www.sunamo.cz. All Rights Reserved.
 internal sealed partial class Exceptions
 {
@@ -14,8 +12,8 @@ internal sealed partial class Exceptions
     internal static Tuple<string, string, string> PlaceOfException(
 bool fillAlsoFirstTwo = true)
     {
-        StackTrace st = new();
-        var stackTraceString = st.ToString();
+        StackTrace stackTrace = new();
+        var stackTraceString = stackTrace.ToString();
         var lines = stackTraceString.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
         lines.RemoveAt(0);
         var i = 0;
@@ -66,10 +64,10 @@ parts.RemoveAt(parts.Count - 1);
     readonly static StringBuilder sbAdditionalInfo = new();
     #endregion
 
-    #region OnlyReturnString 
-    internal static string? BadFormatOfElementInList(string before, object elVal, string listName, Func<object, string> SH_NullToStringOrDefault)
+    #region OnlyReturnString
+    internal static string? BadFormatOfElementInList(string before, object elementValue, string listName, Func<object, string> SH_NullToStringOrDefault)
     {
-        return CheckBefore(before) + " Bad format of element" + " " + SH_NullToStringOrDefault(elVal) +
+        return CheckBefore(before) + " Bad format of element" + " " + SH_NullToStringOrDefault(elementValue) +
         " in list " + listName;
     }
     #endregion

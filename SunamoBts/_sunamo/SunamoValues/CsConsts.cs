@@ -1,6 +1,7 @@
+namespace SunamoBts._sunamo.SunamoValues;
+
 // EN: Variable names have been checked and replaced with self-descriptive names
 // CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
-namespace SunamoBts._sunamo.SunamoValues;
 internal class CsConsts
 {
     #region For easy copy

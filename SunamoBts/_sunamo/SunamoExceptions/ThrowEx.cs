@@ -1,15 +1,16 @@
+namespace SunamoBts._sunamo.SunamoExceptions;
+
 // EN: Variable names have been checked and replaced with self-descriptive names
 // CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
-namespace SunamoBts._sunamo.SunamoExceptions;
 internal partial class ThrowEx
 {
     internal static bool BadFormatOfElementInList(
-        object elVal,
+        object elementValue,
         string listName,
         Func<object, string> SH_NullToStringOrDefault)
     {
         return ThrowIsNotNull(
-            Exceptions.BadFormatOfElementInList(FullNameOfExecutedCode(), elVal, listName, SH_NullToStringOrDefault));
+            Exceptions.BadFormatOfElementInList(FullNameOfExecutedCode(), elementValue, listName, SH_NullToStringOrDefault));
     }
 
     internal static bool NotInt(string what, int? value)
