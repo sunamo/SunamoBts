@@ -1,3 +1,4 @@
+// variables names: ok
 namespace SunamoBts._sunamo.SunamoParsing;
 
 internal class TryParse

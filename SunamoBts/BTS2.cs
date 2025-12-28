@@ -46,11 +46,11 @@ public partial class BTS
         return defaultValue;
     }
 
-    public static int ParseInt(string entry, bool mustBeAllNumbers)
+    public static int ParseInt(string entry, bool isRequiringAllNumbers)
     {
         int result;
         if (!int.TryParse(entry, out result))
-            if (mustBeAllNumbers)
+            if (isRequiringAllNumbers)
                 return int.MinValue;
         return result;
     }

@@ -1,3 +1,4 @@
+// variables names: ok
 namespace SunamoBts._sunamo.SunamoValues;
 
 // EN: Variable names have been checked and replaced with self-descriptive names

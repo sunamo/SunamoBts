@@ -4,9 +4,8 @@ namespace SunamoBts._sunamo;
 // CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
 internal class SH
 {
-    internal static string NullToStringOrDefault(object number)
+    internal static string NullToStringOrDefault(object value)
     {
-
-        return number== null ? " " + "(null)" : " " + number;
+        return value== null ? " " + "(null)" : " " + value;
     }
 }

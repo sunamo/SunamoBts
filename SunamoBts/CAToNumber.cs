@@ -1,3 +1,4 @@
+// variables names: ok
 namespace SunamoBts;
 
 public class CAToNumber
@@ -8,16 +9,16 @@ public class CAToNumber
     /// <typeparam name="T"></typeparam>
     /// <param name="parse"></param>
     /// <param name="enumerable"></param>
-    /// <param name="mustBeAllNumbers"></param>
+    /// <param name="isRequiringAllNumbers"></param>
     /// <returns></returns>
     public static List<T> ToNumber<T>(Func<string, T, T> parseMethod, IList list, T defaultValue,
-        bool mustBeAllNumbers = true)
+        bool isRequiringAllNumbers = true)
     {
         var result = new List<T>();
         foreach (var item in list)
         {
             var number = parseMethod.Invoke(item.ToString(), defaultValue);
-            if (mustBeAllNumbers)
+            if (isRequiringAllNumbers)
                 if (EqualityComparer<T>.Default.Equals(number, defaultValue))
                 {
                     ThrowEx.BadFormatOfElementInList(item, nameof(list), SH.NullToStringOrDefault);
@@ -87,13 +88,12 @@ values[i] = values[i].Substring(0, values[i].IndexOf('.') + 1);
     }
 
     /// <summary>
-    ///     For use with mustBeAllNumbers, must use other parse func than default .net
+    ///     For use with isRequiringAllNumbers, must use other parse func than default .net
     ///     A2 is without genericity
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="parse"></param>
     /// <param name="enumerable"></param>
-    /// <param name="mustBeAllNumbers"></param>
     /// <returns></returns>
     public static List<T> ToNumber<T, U>(Func<string, T> parseMethod, IList<U> list)
     {
