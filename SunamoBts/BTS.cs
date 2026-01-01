@@ -1,82 +1,139 @@
 namespace SunamoBts;
 
-// EN: Variable names have been checked and replaced with self-descriptive names
-// CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
+/// <summary>
+/// Basic Type System utilities for parsing and converting between primitive types
+/// </summary>
 public partial class BTS
 {
     //        #region  from BTSShared64.cs
-    public static int lastInt = -1;
-    public static long lastLong = -1;
-    public static float lastFloat = -1;
-    public static double lastDouble = -1;
-    private static Type type = typeof(BTS);
-    public static byte lastByte = 255;
-    public static bool lastBool;
-    public static DateTime lastDateTime = DateTime.MinValue;
-    public static string Replace(ref string value, bool replaceCommaForDot)
+    /// <summary>
+    /// Last successfully parsed int value
+    /// </summary>
+    public static int LastInt = -1;
+    /// <summary>
+    /// Last successfully parsed long value
+    /// </summary>
+    public static long LastLong = -1;
+    /// <summary>
+    /// Last successfully parsed float value
+    /// </summary>
+    public static float LastFloat = -1;
+    /// <summary>
+    /// Last successfully parsed double value
+    /// </summary>
+    public static double LastDouble = -1;
+    /// <summary>
+    /// Last successfully parsed byte value
+    /// </summary>
+    public static byte LastByte = 255;
+    /// <summary>
+    /// Last successfully parsed bool value
+    /// </summary>
+    public static bool LastBool;
+    /// <summary>
+    /// Last successfully parsed DateTime value
+    /// </summary>
+    public static DateTime LastDateTime = DateTime.MinValue;
+    /// <summary>
+    /// Replaces comma with dot in the string value if specified
+    /// </summary>
+    /// <param name="value">The string value to modify</param>
+    /// <param name="isReplacingCommaForDot">Whether to replace comma with dot</param>
+    /// <returns>Modified string value</returns>
+    public static string Replace(ref string value, bool isReplacingCommaForDot)
     {
-        if (replaceCommaForDot)
+        if (isReplacingCommaForDot)
             value = value.Replace(",", ".");
         return value;
     }
 
-    public static bool IsFloat(string value, bool replaceCommaForDot = false)
+    /// <summary>
+    /// Checks if the string value can be parsed as a float number
+    /// </summary>
+    /// <param name="value">The string value to check</param>
+    /// <param name="isReplacingCommaForDot">Whether to replace comma with dot before parsing</param>
+    /// <returns>True if value can be parsed as float, false otherwise</returns>
+    public static bool IsFloat(string value, bool isReplacingCommaForDot = false)
     {
         if (value == null)
             return false;
-        Replace(ref value, replaceCommaForDot);
-        return float.TryParse(value.Replace(",", "."), out lastFloat);
+        Replace(ref value, isReplacingCommaForDot);
+        return float.TryParse(value.Replace(",", "."), out LastFloat);
     }
 
-    public static bool IsDouble(string value, bool replaceCommaForDot = false)
+    /// <summary>
+    /// Checks if the string value can be parsed as a double number
+    /// </summary>
+    /// <param name="value">The string value to check</param>
+    /// <param name="isReplacingCommaForDot">Whether to replace comma with dot before parsing</param>
+    /// <returns>True if value can be parsed as double, false otherwise</returns>
+    public static bool IsDouble(string value, bool isReplacingCommaForDot = false)
     {
         if (value == null)
             return false;
-        Replace(ref value, replaceCommaForDot);
-        return double.TryParse(value.Replace(",", "."), out lastDouble);
+        Replace(ref value, isReplacingCommaForDot);
+        return double.TryParse(value.Replace(",", "."), out LastDouble);
     }
 
     /// <summary>
     ///     Usage: Exceptions.IsInt
     /// </summary>
-    /// <param name = "id"></param>
-    /// <param name = "excIfIsFloat"></param>
-    /// <param name = "replaceCommaForDot"></param>
+    /// <param name = "value"></param>
+    /// <param name = "isThrowingExceptionIfFloat"></param>
+    /// <param name = "isReplacingCommaForDot"></param>
     /// <returns></returns>
-    public static bool IsInt(string value, bool excIfIsFloat = false, bool replaceCommaForDot = false)
+    public static bool IsInt(string value, bool isThrowingExceptionIfFloat = false, bool isReplacingCommaForDot = false)
     {
         if (value == null)
             return false;
         value = value.Replace(" ", "");
-        Replace(ref value, replaceCommaForDot);
-        var result = int.TryParse(value, out lastInt);
+        Replace(ref value, isReplacingCommaForDot);
+        var result = int.TryParse(value, out LastInt);
         if (!result)
             if (IsFloat(value))
-                if (excIfIsFloat)
+                if (isThrowingExceptionIfFloat)
                     throw new Exception(value + " is float but is calling IsInt");
         return result;
     }
 
-    public static bool IsLong(string value, bool excIfIsDouble = false, bool replaceCommaForDot = false)
+    /// <summary>
+    /// Checks if the string value can be parsed as a long number
+    /// </summary>
+    /// <param name="value">The string value to check</param>
+    /// <param name="isThrowingExceptionIfDouble">Whether to throw exception if value is a double number</param>
+    /// <param name="isReplacingCommaForDot">Whether to replace comma with dot before parsing</param>
+    /// <returns>True if value can be parsed as long, false otherwise</returns>
+    /// <exception cref="Exception">Thrown when value is double and isThrowingExceptionIfDouble is true</exception>
+    public static bool IsLong(string value, bool isThrowingExceptionIfDouble = false, bool isReplacingCommaForDot = false)
     {
         if (value == null)
             return false;
-        value = value.Replace(" ", ""); //SHReplace.ReplaceAll4(, "", " ");
-        Replace(ref value, replaceCommaForDot);
-        var result = long.TryParse(value, out lastLong);
+        value = value.Replace(" ", "");
+        Replace(ref value, isReplacingCommaForDot);
+        var result = long.TryParse(value, out LastLong);
         if (!result)
             if (IsDouble(value))
-                if (excIfIsDouble)
-                    throw new Exception(value + " is float but is calling IsInt");
+                if (isThrowingExceptionIfDouble)
+                    throw new Exception(value + " is double but is calling IsLong");
         return result;
     }
 
     //        #endregion
+    /// <summary>
+    /// Converts hexadecimal string to integer
+    /// </summary>
+    /// <param name="hexValue">Hexadecimal string value</param>
+    /// <returns>Converted integer value</returns>
     public static int FromHex(string hexValue)
     {
         return int.Parse(hexValue, NumberStyles.HexNumber);
     }
 
+    /// <summary>
+    /// Creates a Stream from a string
+    /// </summary>
+    /// <param name="text">The text to convert to stream</param>
+    /// <returns>MemoryStream containing the text</returns>
     public static Stream StreamFromString(string text)
     {
         var stream = new MemoryStream();
@@ -87,6 +144,11 @@ public partial class BTS
         return stream;
     }
 
+    /// <summary>
+    /// Reads all text from a Stream
+    /// </summary>
+    /// <param name="stream">The stream to read from</param>
+    /// <returns>String containing all text from the stream</returns>
     public static string StringFromStream(Stream stream)
     {
         var reader = new StreamReader(stream);
@@ -94,9 +156,14 @@ public partial class BTS
         return text;
     }
 
+    /// <summary>
+    /// Tries to parse the string value as a boolean
+    /// </summary>
+    /// <param name="value">The string value to parse</param>
+    /// <returns>True if parsing succeeded, false otherwise</returns>
     public static bool TryParseBool(string value)
     {
-        return bool.TryParse(value, out lastBool);
+        return bool.TryParse(value, out LastBool);
     }
 
     /// <summary>
@@ -119,10 +186,11 @@ public partial class BTS
     }
 
     /// <summary>
-    ///     G zda  prvky A2 - Ax jsou hodnoty A1.
+    ///     Checks whether all elements in the array have the same value as the first parameter.
     /// </summary>
-    /// <param name = "hodnota"></param>
-    /// <param name = "paramy"></param>
+    /// <param name = "value">The value to compare against</param>
+    /// <param name = "values">Array of values to check</param>
+    /// <returns>True if all values match, false otherwise</returns>
     public static bool IsAllEquals(bool value, params bool[] values)
     {
         for (var i = 0; i < values.Length; i++)
@@ -131,26 +199,37 @@ public partial class BTS
         return true;
     }
 
-    /// <param name = "od"></param>
-    /// <param name = "to"></param>
-    /// <param name = "value"></param>
+    /// <summary>
+    /// Checks if the value is within the specified range (inclusive)
+    /// </summary>
+    /// <param name = "from">Range start value</param>
+    /// <param name = "to">Range end value</param>
+    /// <param name = "value">Value to check</param>
+    /// <returns>True if value is in range, false otherwise</returns>
     public static bool IsInRange(int from, int to, int value)
     {
-        if (value == 100)
-        {
-        }
-
         // Here I had opposite signs, now it should be correct
         return from <= value && to >= value;
     }
 
-    public static bool Is(bool value, bool negate)
+    /// <summary>
+    /// Returns the value, optionally negated
+    /// </summary>
+    /// <param name="value">The boolean value</param>
+    /// <param name="isNegated">Whether to negate the value</param>
+    /// <returns>Original or negated value</returns>
+    public static bool Is(bool value, bool isNegated)
     {
-        if (negate)
+        if (isNegated)
             return !value;
         return value;
     }
 
+    /// <summary>
+    /// Returns only non-null key-value pairs from the arguments
+    /// </summary>
+    /// <param name="args">Array of string arguments in key-value pairs</param>
+    /// <returns>List containing only non-null values</returns>
     public static List<string> GetOnlyNonNullValues(params string[] args)
     {
         var result = new List<string>();
@@ -161,13 +240,19 @@ public partial class BTS
             if (value != null)
             {
                 result.Add(text);
-                result.Add(value.ToString());
+                result.Add(value.ToString()!);
             }
         }
 
         return result;
     }
 
+    /// <summary>
+    /// Gets the maximum value for a given numeric type
+    /// </summary>
+    /// <param name="type">The numeric type to get max value for</param>
+    /// <returns>Maximum value for the type</returns>
+    /// <exception cref="Exception">Thrown when type is not a numeric type</exception>
     public static object GetMaxValueForType(Type type)
     {
         if (type == typeof(byte))
@@ -192,10 +277,14 @@ public partial class BTS
             return uint.MaxValue;
         if (type == typeof(ulong))
             return ulong.MaxValue;
-        throw new Exception("Nepovolen\u00FD nehodnotov\u00FD typ v metod\u011B GetMaxValueForType");
-        return 0;
+        throw new Exception("Invalid non-value type in method GetMaxValueForType");
     }
 
+    /// <summary>
+    /// Removes trailing zero bytes from the list
+    /// </summary>
+    /// <param name="plainTextBytes">The list of bytes to process</param>
+    /// <returns>List of bytes with trailing zeros removed</returns>
     public static List<byte> ClearEndingsBytes(List<byte> plainTextBytes)
     {
         var bytes = new List<byte>();
@@ -223,15 +312,26 @@ public partial class BTS
         return bytes;
     }
 
+    /// <summary>
+    /// Parses string to nullable int, returns null if parsing fails
+    /// </summary>
+    /// <param name="value">The string value to parse</param>
+    /// <returns>Parsed integer or null if parsing failed</returns>
     public static int? ParseIntNull(string value)
     {
-        if (int.TryParse(value, out lastInt))
-            return lastInt;
+        if (int.TryParse(value, out LastInt))
+            return LastInt;
         return null;
     }
 
-    public static string ToString<T>(T value)
+    /// <summary>
+    /// Converts value to string using ToString method
+    /// </summary>
+    /// <typeparam name="T">Type of the value</typeparam>
+    /// <param name="value">The value to convert</param>
+    /// <returns>String representation of the value</returns>
+    public static string ToString<T>(T value) where T : notnull
     {
-        return value.ToString();
+        return value.ToString()!;
     }
 }

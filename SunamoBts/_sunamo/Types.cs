@@ -21,11 +21,11 @@ internal class Types
     internal static readonly Type TBinary = typeof(byte[]);
     internal static readonly Type TChar = typeof(char);
     internal static readonly List<Type> AllBasicTypes = new()
-{
-TObject, TString, TStringBuilder, TInt, TDateTime,
-TDouble, TFloat, TChar, TBinary, TByte, TShort, TBinary, TLong, TDecimal, TSbyte, TUshort, TUint, TUlong
-};
-    internal static readonly Type List = typeof(IList);
+    {
+        TObject, TString, TStringBuilder, TInt, TDateTime,
+        TDouble, TFloat, TChar, TBinary, TByte, TShort, TBinary, TLong, TDecimal, TSbyte, TUshort, TUint, TUlong
+    };
+    internal static readonly Type TList = typeof(IList);
     #region Same seria as in DefaultValueForTypeT
     internal static readonly Type TBool = typeof(bool);
     #region Signed numbers

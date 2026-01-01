@@ -1,16 +1,14 @@
 namespace SunamoBts._sunamo.SunamoExceptions;
 
-// EN: Variable names have been checked and replaced with self-descriptive names
-// CZ: Názvy proměnných byly zkontrolovány a nahrazeny samopopisnými názvy
 internal partial class ThrowEx
 {
     internal static bool BadFormatOfElementInList(
         object elementValue,
         string listName,
-        Func<object, string> SH_NullToStringOrDefault)
+        Func<object, string> nullToStringConverter)
     {
         return ThrowIsNotNull(
-            Exceptions.BadFormatOfElementInList(FullNameOfExecutedCode(), elementValue, listName, SH_NullToStringOrDefault));
+            Exceptions.BadFormatOfElementInList(FullNameOfExecutedCode(), elementValue, listName, nullToStringConverter));
     }
 
     internal static bool NotInt(string what, int? value)
@@ -24,12 +22,12 @@ internal partial class ThrowEx
         return fullName;
     }
 
-    static string FullNameOfExecutedCode(object type, string methodName, bool fromThrowEx = false)
+    static string FullNameOfExecutedCode(object type, string methodName, bool isFromThrowEx = false)
     {
         if (methodName == null)
         {
             int depth = 2;
-            if (fromThrowEx)
+            if (isFromThrowEx)
             {
                 depth++;
             }
@@ -52,17 +50,17 @@ internal partial class ThrowEx
         }
         else
         {
-            Type actualType= type.GetType();
+            Type actualType = type.GetType();
             typeFullName = actualType.FullName ?? "Type cannot be get via type.GetType()";
         }
         return string.Concat(typeFullName, ".", methodName);
     }
-    internal static bool ThrowIsNotNull(string? exception, bool reallyThrow = true)
+    internal static bool ThrowIsNotNull(string? exception, bool isReallyThrowing = true)
     {
         if (exception != null)
         {
             Debugger.Break();
-            if (reallyThrow)
+            if (isReallyThrowing)
             {
                 throw new Exception(exception);
             }

@@ -9,8 +9,7 @@ internal sealed partial class Exceptions
         return string.IsNullOrWhiteSpace(before) ? string.Empty : before + ": ";
     }
 
-    internal static Tuple<string, string, string> PlaceOfException(
-bool fillAlsoFirstTwo = true)
+    internal static Tuple<string, string, string> PlaceOfException(bool isFillingFirstTwo = true)
     {
         StackTrace stackTrace = new();
         var stackTraceString = stackTrace.ToString();
@@ -22,11 +21,11 @@ bool fillAlsoFirstTwo = true)
         for (; i < lines.Count; i++)
         {
             var item = lines[i];
-            if (fillAlsoFirstTwo)
+            if (isFillingFirstTwo)
                 if (!item.StartsWith("   at ThrowEx"))
                 {
                     TypeAndMethodName(item, out type, out methodName);
-                    fillAlsoFirstTwo = false;
+                    isFillingFirstTwo = false;
                 }
             if (item.StartsWith("at System."))
             {
@@ -41,12 +40,12 @@ bool fillAlsoFirstTwo = true)
     {
         var contentAfterAt = line.Split("at ")[1].Trim();
         var text = contentAfterAt.Split("(")[0];
-        var parts= text.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+        var parts = text.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
         methodName = parts[^1];
-parts.RemoveAt(parts.Count - 1);
+        parts.RemoveAt(parts.Count - 1);
         type = string.Join(".", parts);
     }
-    internal static string CallingMethod(int depth= 1)
+    internal static string CallingMethod(int depth = 1)
     {
         StackTrace stackTrace = new();
         var methodBase = stackTrace.GetFrame(depth)?.GetMethod();
@@ -59,20 +58,15 @@ parts.RemoveAt(parts.Count - 1);
     }
     #endregion
 
-    #region IsNullOrWhitespace
-    readonly static StringBuilder sbAdditionalInfoInner = new();
-    readonly static StringBuilder sbAdditionalInfo = new();
-    #endregion
-
     #region OnlyReturnString
-    internal static string? BadFormatOfElementInList(string before, object elementValue, string listName, Func<object, string> SH_NullToStringOrDefault)
+    internal static string? BadFormatOfElementInList(string before, object elementValue, string listName, Func<object, string> nullToStringConverter)
     {
-        return CheckBefore(before) + " Bad format of element" + " " + SH_NullToStringOrDefault(elementValue) +
+        return CheckBefore(before) + " Bad format of element" + " " + nullToStringConverter(elementValue) +
         " in list " + listName;
     }
     #endregion
-    internal static string? NotInt(string before, string what, int? depth)
+    internal static string? NotInt(string before, string what, int? value)
     {
-        return !depth.HasValue ? CheckBefore(before) + what + " is not with value " + depth+ " valid integer number" : null;
+        return !value.HasValue ? CheckBefore(before) + what + " is not a valid integer number" : null;
     }
 }
