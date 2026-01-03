@@ -14,13 +14,13 @@ public partial class BTS
     /// <summary>
     /// Parses a string value to a float, replacing comma with dot for decimal separation
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <returns>The parsed float value or float.MinValue if parsing fails</returns>
-    public static float ParseFloat(string value)
+    public static float ParseFloat(string text)
     {
         var result = float.MinValue;
-        value = value.Replace(',', '.');
-        if (float.TryParse(value, out result))
+        text = text.Replace(',', '.');
+        if (float.TryParse(text, out result))
             return result;
         return result;
     }
@@ -28,11 +28,11 @@ public partial class BTS
     /// <summary>
     ///     Returns false if parsing fails
     /// </summary>
-    /// <param name = "value"></param>
-    public static bool ParseBool(string value)
+    /// <param name = "text"></param>
+    public static bool ParseBool(string text)
     {
         var result = false;
-        if (bool.TryParse(value, out result))
+        if (bool.TryParse(text, out result))
             return result;
         return false;
     }
@@ -40,13 +40,13 @@ public partial class BTS
     /// <summary>
     ///     Returns the default value if parsing fails
     /// </summary>
-    /// <param name = "value">The string value to parse</param>
+    /// <param name = "text">The string value to parse</param>
     /// <param name = "defaultValue">The default value to return if parsing fails</param>
     /// <returns>Parsed boolean value or default value if parsing fails</returns>
-    public static bool ParseBool(string value, bool defaultValue)
+    public static bool ParseBool(string text, bool defaultValue)
     {
         var result = false;
-        if (bool.TryParse(value, out result))
+        if (bool.TryParse(text, out result))
             return result;
         return defaultValue;
     }
@@ -54,13 +54,13 @@ public partial class BTS
     /// <summary>
     /// Parses a string value to an int with optional strict parsing requirement
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <param name="isRequiringAllNumbers">If true, returns int.MinValue when parsing fails; otherwise, returns 0</param>
     /// <returns>The parsed int value, int.MinValue if strict mode fails, or 0 if non-strict mode fails</returns>
-    public static int ParseInt(string value, bool isRequiringAllNumbers)
+    public static int ParseInt(string text, bool isRequiringAllNumbers)
     {
         int result;
-        if (!int.TryParse(value, out result))
+        if (!int.TryParse(text, out result))
             if (isRequiringAllNumbers)
                 return int.MinValue;
         return result;
@@ -69,14 +69,14 @@ public partial class BTS
     /// <summary>
     /// Parses a string value to a double, removing spaces before parsing
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <param name="defaultValue">The default value to return if parsing fails</param>
     /// <returns>The parsed double value or the specified default value if parsing fails</returns>
-    public static double ParseDouble(string value, double defaultValue)
+    public static double ParseDouble(string text, double defaultValue)
     {
-        value = value.Replace(" ", string.Empty);
+        text = text.Replace(" ", string.Empty);
         double parsedValue = 0;
-        if (double.TryParse(value, out parsedValue))
+        if (double.TryParse(text, out parsedValue))
             return parsedValue;
         return defaultValue;
     }
@@ -84,14 +84,14 @@ public partial class BTS
     /// <summary>
     /// Parses a string value to an int, removing spaces before parsing
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <param name="defaultValue">The default value to return if parsing fails</param>
     /// <returns>The parsed int value or the specified default value if parsing fails</returns>
-    public static int ParseInt(string value, int defaultValue)
+    public static int ParseInt(string text, int defaultValue)
     {
-        value = value.Replace(" ", string.Empty);
+        text = text.Replace(" ", string.Empty);
         var parsedValue = 0;
-        if (int.TryParse(value, out parsedValue))
+        if (int.TryParse(text, out parsedValue))
             return parsedValue;
         return defaultValue;
     }
@@ -99,13 +99,13 @@ public partial class BTS
     /// <summary>
     /// Parses a string value to a byte with a default value
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <param name="defaultValue">The default value to return if parsing fails</param>
     /// <returns>The parsed byte value or the specified default value if parsing fails</returns>
-    public static byte ParseByte(string value, byte defaultValue)
+    public static byte ParseByte(string text, byte defaultValue)
     {
         byte parsedValue = 0;
-        if (byte.TryParse(value, out parsedValue))
+        if (byte.TryParse(text, out parsedValue))
             return parsedValue;
         return defaultValue;
     }
@@ -113,30 +113,30 @@ public partial class BTS
     /// <summary>
     /// Determines whether the specified string value can be parsed as a byte
     /// </summary>
-    /// <param name="value">The string value to validate</param>
+    /// <param name="text">The string value to validate</param>
     /// <returns>True if the value can be parsed as byte; otherwise, false</returns>
-    public static bool IsByte(string value)
+    public static bool IsByte(string text)
     {
-        if (value == null)
+        if (text == null)
             return false;
-        return byte.TryParse(value, out LastByte);
+        return byte.TryParse(text, out LastByte);
     }
 
     /// <summary>
     /// Determines whether the specified string value can be parsed as a byte and outputs the result
     /// </summary>
-    /// <param name="value">The string value to validate</param>
+    /// <param name="text">The string value to validate</param>
     /// <param name="result">When this method returns, contains the parsed byte value if successful, or 0 if parsing failed</param>
     /// <returns>True if the value can be parsed as byte; otherwise, false</returns>
-    public static bool IsByte(string value, out byte result)
+    public static bool IsByte(string text, out byte result)
     {
-        if (value == null)
+        if (text == null)
         {
             result = 0;
             return false;
         }
 
-        var parseResult = byte.TryParse(value, out result);
+        var parseResult = byte.TryParse(text, out result);
         return parseResult;
     }
 
@@ -295,10 +295,10 @@ public partial class BTS
     ///     Throws an exception if any value cannot be cast to int
     ///     Before use you can call RemoveNotNumber to avoid raise exception
     /// </summary>
-    /// <param name = "collection"></param>
-    public static List<int> CastCollectionStringToInt(IList<string> collection)
+    /// <param name = "list"></param>
+    public static List<int> CastCollectionStringToInt(IList<string> list)
     {
-        return CAToNumber.ToNumber(int.Parse, collection);
+        return CAToNumber.ToNumber(int.Parse, list);
     }
 
     /// <summary>

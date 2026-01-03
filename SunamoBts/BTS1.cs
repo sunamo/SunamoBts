@@ -56,24 +56,24 @@ public partial class BTS
     /// <summary>
     /// Determines whether the specified string value can be parsed as a DateTime
     /// </summary>
-    /// <param name="value">The string value to validate</param>
+    /// <param name="text">The string value to validate</param>
     /// <returns>True if the value can be parsed as DateTime; otherwise, false</returns>
-    public static bool IsDateTime(string value)
+    public static bool IsDateTime(string text)
     {
-        if (value == null)
+        if (text == null)
             return false;
-        return DateTime.TryParse(value, out LastDateTime);
+        return DateTime.TryParse(text, out LastDateTime);
     }
 
     /// <summary>
     ///     If the value cannot be parsed, returns int.MinValue
     ///     Replace spaces
     /// </summary>
-    /// <param name = "value"></param>
-    public static int ParseInt(string value)
+    /// <param name = "text"></param>
+    public static int ParseInt(string text)
     {
         var parsedValue = 0;
-        if (int.TryParse(value.Replace(" ", string.Empty), out parsedValue))
+        if (int.TryParse(text.Replace(" ", string.Empty), out parsedValue))
             return parsedValue;
         return int.MinValue;
     }
@@ -81,24 +81,24 @@ public partial class BTS
     /// <summary>
     /// Determines whether the specified string value can be parsed as a boolean
     /// </summary>
-    /// <param name="value">The string value to validate</param>
+    /// <param name="text">The string value to validate</param>
     /// <returns>True if the value can be parsed as boolean; otherwise, false</returns>
-    public static bool IsBool(string value)
+    public static bool IsBool(string text)
     {
-        if (value == null)
+        if (text == null)
             return false;
-        return bool.TryParse(value, out LastBool);
+        return bool.TryParse(text, out LastBool);
     }
 
     /// <summary>
     /// Parses the specified string value to a byte. Returns byte.MinValue if parsing fails
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <returns>The parsed byte value or byte.MinValue if parsing fails</returns>
-    public static byte ParseByte(string value)
+    public static byte ParseByte(string text)
     {
         byte parsedValue = 0;
-        if (byte.TryParse(value, out parsedValue))
+        if (byte.TryParse(text, out parsedValue))
             return parsedValue;
         return byte.MinValue;
     }
@@ -106,23 +106,23 @@ public partial class BTS
     /// <summary>
     /// Parses the specified string value to a short. Returns short.MinValue if parsing fails
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <returns>The parsed short value or short.MinValue if parsing fails</returns>
-    public static short ParseShort(string value)
+    public static short ParseShort(string text)
     {
-        return ParseShort(value, short.MinValue);
+        return ParseShort(text, short.MinValue);
     }
 
     /// <summary>
     /// Parses the specified string value to a short with a default value
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <param name="defaultValue">The default value to return if parsing fails</param>
     /// <returns>The parsed short value or the specified default value if parsing fails</returns>
-    public static short ParseShort(string value, short defaultValue)
+    public static short ParseShort(string text, short defaultValue)
     {
         short parsedValue = 0;
-        if (short.TryParse(value, out parsedValue))
+        if (short.TryParse(text, out parsedValue))
             return parsedValue;
         return defaultValue;
     }
@@ -130,13 +130,13 @@ public partial class BTS
     /// <summary>
     /// Parses the specified string value to a nullable int with a default value
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <param name="defaultValue">The default nullable value to return if parsing fails</param>
     /// <returns>The parsed int value or the specified default value if parsing fails</returns>
-    public static int? ParseInt(string value, int? defaultValue)
+    public static int? ParseInt(string text, int? defaultValue)
     {
         var parsedValue = 0;
-        if (int.TryParse(value, out parsedValue))
+        if (int.TryParse(text, out parsedValue))
             return parsedValue;
         return defaultValue;
     }
@@ -231,13 +231,13 @@ public partial class BTS
     /// <summary>
     ///     For parsing from serialized file use DTHelperEn
     /// </summary>
-    /// <param name = "value"></param>
+    /// <param name = "text"></param>
     /// <param name = "cultureInfo"></param>
     /// <param name = "defaultValue"></param>
-    public static DateTime TryParseDateTime(string value, CultureInfo cultureInfo, DateTime defaultValue)
+    public static DateTime TryParseDateTime(string text, CultureInfo cultureInfo, DateTime defaultValue)
     {
         var result = defaultValue;
-        if (DateTime.TryParse(value, cultureInfo, DateTimeStyles.None, out result))
+        if (DateTime.TryParse(text, cultureInfo, DateTimeStyles.None, out result))
             return result;
         return defaultValue;
     }
@@ -250,21 +250,21 @@ public partial class BTS
     /// <summary>
     /// Attempts to parse a string value to a uint and stores the result in LastUint
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <returns>True if parsing succeeded; otherwise, false</returns>
-    public static bool TryParseUint(string value)
+    public static bool TryParseUint(string text)
     {
-        return uint.TryParse(value, out LastUint);
+        return uint.TryParse(text, out LastUint);
     }
 
     /// <summary>
     /// Attempts to parse a string value to a DateTime and stores the result in LastDateTime
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <returns>True if parsing succeeded; otherwise, false</returns>
-    public static bool TryParseDateTime(string value)
+    public static bool TryParseDateTime(string text)
     {
-        if (DateTime.TryParse(value, out LastDateTime))
+        if (DateTime.TryParse(text, out LastDateTime))
             return true;
         return false;
     }
@@ -272,13 +272,13 @@ public partial class BTS
     /// <summary>
     /// Attempts to parse a string value to a byte with a default value
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <param name="defaultValue">The default value to return if parsing fails</param>
     /// <returns>The parsed byte value or the specified default value if parsing fails</returns>
-    public static byte TryParseByte(string value, byte defaultValue)
+    public static byte TryParseByte(string text, byte defaultValue)
     {
         var result = defaultValue;
-        if (byte.TryParse(value, out result))
+        if (byte.TryParse(text, out result))
             return result;
         return defaultValue;
     }
@@ -286,12 +286,12 @@ public partial class BTS
     /// <summary>
     ///     Returns parsed value if parsing succeeds, otherwise returns the default value
     /// </summary>
-    /// <param name = "value"></param>
+    /// <param name = "text"></param>
     /// <param name = "defaultValue"></param>
-    public static bool TryParseBool(string value, bool defaultValue)
+    public static bool TryParseBool(string text, bool defaultValue)
     {
         var result = defaultValue;
-        if (bool.TryParse(value, out result))
+        if (bool.TryParse(text, out result))
             return result;
         return defaultValue;
     }
@@ -299,15 +299,15 @@ public partial class BTS
     /// <summary>
     /// Attempts to parse a string value to an int with null checking, returns 0 if value is null
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <param name="defaultValue">The default value to return if parsing fails</param>
     /// <returns>0 if value is null, the parsed int value if successful, or the default value if parsing fails</returns>
-    public static int TryParseIntCheckNull(string value, int defaultValue)
+    public static int TryParseIntCheckNull(string text, int defaultValue)
     {
         var parsedValue = 0;
-        if (value == null)
+        if (text == null)
             return parsedValue;
-        if (int.TryParse(value, out parsedValue))
+        if (int.TryParse(text, out parsedValue))
             return parsedValue;
         return defaultValue;
     }
@@ -315,28 +315,28 @@ public partial class BTS
     /// <summary>
     /// Attempts to parse a string value to an int with a default value
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <param name="defaultValue">The default value to return if parsing fails</param>
     /// <returns>The parsed int value or the specified default value if parsing fails</returns>
-    public static int TryParseInt(string value, int defaultValue)
+    public static int TryParseInt(string text, int defaultValue)
     {
-        return TryParseInt(value, defaultValue, false);
+        return TryParseInt(text, defaultValue, false);
     }
 
     /// <summary>
     /// Attempts to parse a string value to an int with optional exception throwing
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <param name="defaultValue">The default value to return if parsing fails</param>
     /// <param name="isThrowingException">If true, throws an exception when parsing fails; otherwise, returns the default value</param>
     /// <returns>The parsed int value or the specified default value if parsing fails</returns>
-    public static int TryParseInt(string value, int defaultValue, bool isThrowingException)
+    public static int TryParseInt(string text, int defaultValue, bool isThrowingException)
     {
         var parsedValue = 0;
-        if (int.TryParse(value, out parsedValue))
+        if (int.TryParse(text, out parsedValue))
             return parsedValue;
         if (isThrowingException)
-            ThrowEx.NotInt(value, null);
+            ThrowEx.NotInt(text, null);
         return defaultValue;
     }
 

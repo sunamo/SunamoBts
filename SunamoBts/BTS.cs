@@ -37,84 +37,84 @@ public partial class BTS
     /// <summary>
     /// Replaces comma with dot in the string value if specified
     /// </summary>
-    /// <param name="value">The string value to modify</param>
+    /// <param name="text">The string value to modify</param>
     /// <param name="isReplacingCommaForDot">Whether to replace comma with dot</param>
     /// <returns>Modified string value</returns>
-    public static string Replace(ref string value, bool isReplacingCommaForDot)
+    public static string Replace(ref string text, bool isReplacingCommaForDot)
     {
         if (isReplacingCommaForDot)
-            value = value.Replace(",", ".");
-        return value;
+            text = text.Replace(",", ".");
+        return text;
     }
 
     /// <summary>
     /// Checks if the string value can be parsed as a float number
     /// </summary>
-    /// <param name="value">The string value to check</param>
+    /// <param name="text">The string value to check</param>
     /// <param name="isReplacingCommaForDot">Whether to replace comma with dot before parsing</param>
     /// <returns>True if value can be parsed as float, false otherwise</returns>
-    public static bool IsFloat(string value, bool isReplacingCommaForDot = false)
+    public static bool IsFloat(string text, bool isReplacingCommaForDot = false)
     {
-        if (value == null)
+        if (text == null)
             return false;
-        Replace(ref value, isReplacingCommaForDot);
-        return float.TryParse(value.Replace(",", "."), out LastFloat);
+        Replace(ref text, isReplacingCommaForDot);
+        return float.TryParse(text.Replace(",", "."), out LastFloat);
     }
 
     /// <summary>
     /// Checks if the string value can be parsed as a double number
     /// </summary>
-    /// <param name="value">The string value to check</param>
+    /// <param name="text">The string value to check</param>
     /// <param name="isReplacingCommaForDot">Whether to replace comma with dot before parsing</param>
     /// <returns>True if value can be parsed as double, false otherwise</returns>
-    public static bool IsDouble(string value, bool isReplacingCommaForDot = false)
+    public static bool IsDouble(string text, bool isReplacingCommaForDot = false)
     {
-        if (value == null)
+        if (text == null)
             return false;
-        Replace(ref value, isReplacingCommaForDot);
-        return double.TryParse(value.Replace(",", "."), out LastDouble);
+        Replace(ref text, isReplacingCommaForDot);
+        return double.TryParse(text.Replace(",", "."), out LastDouble);
     }
 
     /// <summary>
     ///     Usage: Exceptions.IsInt
     /// </summary>
-    /// <param name = "value"></param>
+    /// <param name = "text"></param>
     /// <param name = "isThrowingExceptionIfFloat"></param>
     /// <param name = "isReplacingCommaForDot"></param>
     /// <returns></returns>
-    public static bool IsInt(string value, bool isThrowingExceptionIfFloat = false, bool isReplacingCommaForDot = false)
+    public static bool IsInt(string text, bool isThrowingExceptionIfFloat = false, bool isReplacingCommaForDot = false)
     {
-        if (value == null)
+        if (text == null)
             return false;
-        value = value.Replace(" ", "");
-        Replace(ref value, isReplacingCommaForDot);
-        var result = int.TryParse(value, out LastInt);
+        text = text.Replace(" ", "");
+        Replace(ref text, isReplacingCommaForDot);
+        var result = int.TryParse(text, out LastInt);
         if (!result)
-            if (IsFloat(value))
+            if (IsFloat(text))
                 if (isThrowingExceptionIfFloat)
-                    throw new Exception(value + " is float but is calling IsInt");
+                    throw new Exception(text + " is float but is calling IsInt");
         return result;
     }
 
     /// <summary>
     /// Checks if the string value can be parsed as a long number
     /// </summary>
-    /// <param name="value">The string value to check</param>
+    /// <param name="text">The string value to check</param>
     /// <param name="isThrowingExceptionIfDouble">Whether to throw exception if value is a double number</param>
     /// <param name="isReplacingCommaForDot">Whether to replace comma with dot before parsing</param>
     /// <returns>True if value can be parsed as long, false otherwise</returns>
     /// <exception cref="Exception">Thrown when value is double and isThrowingExceptionIfDouble is true</exception>
-    public static bool IsLong(string value, bool isThrowingExceptionIfDouble = false, bool isReplacingCommaForDot = false)
+    public static bool IsLong(string text, bool isThrowingExceptionIfDouble = false, bool isReplacingCommaForDot = false)
     {
-        if (value == null)
+        if (text == null)
             return false;
-        value = value.Replace(" ", "");
-        Replace(ref value, isReplacingCommaForDot);
-        var result = long.TryParse(value, out LastLong);
+        text = text.Replace(" ", "");
+        Replace(ref text, isReplacingCommaForDot);
+        var result = long.TryParse(text, out LastLong);
         if (!result)
-            if (IsDouble(value))
+            if (IsDouble(text))
                 if (isThrowingExceptionIfDouble)
-                    throw new Exception(value + " is double but is calling IsLong");
+                    throw new Exception(text + " is double but is calling IsLong");
         return result;
     }
 
@@ -122,11 +122,11 @@ public partial class BTS
     /// <summary>
     /// Converts hexadecimal string to integer
     /// </summary>
-    /// <param name="hexValue">Hexadecimal string value</param>
+    /// <param name="hexText">Hexadecimal string value</param>
     /// <returns>Converted integer value</returns>
-    public static int FromHex(string hexValue)
+    public static int FromHex(string hexText)
     {
-        return int.Parse(hexValue, NumberStyles.HexNumber);
+        return int.Parse(hexText, NumberStyles.HexNumber);
     }
 
     /// <summary>
@@ -159,11 +159,11 @@ public partial class BTS
     /// <summary>
     /// Tries to parse the string value as a boolean
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <returns>True if parsing succeeded, false otherwise</returns>
-    public static bool TryParseBool(string value)
+    public static bool TryParseBool(string text)
     {
-        return bool.TryParse(value, out LastBool);
+        return bool.TryParse(text, out LastBool);
     }
 
     /// <summary>
@@ -315,11 +315,11 @@ public partial class BTS
     /// <summary>
     /// Parses string to nullable int, returns null if parsing fails
     /// </summary>
-    /// <param name="value">The string value to parse</param>
+    /// <param name="text">The string value to parse</param>
     /// <returns>Parsed integer or null if parsing failed</returns>
-    public static int? ParseIntNull(string value)
+    public static int? ParseIntNull(string text)
     {
-        if (int.TryParse(value, out LastInt))
+        if (int.TryParse(text, out LastInt))
             return LastInt;
         return null;
     }

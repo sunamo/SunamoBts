@@ -1,3 +1,4 @@
+// variables names: ok
 namespace RunnerBts;
 
 internal class Program
