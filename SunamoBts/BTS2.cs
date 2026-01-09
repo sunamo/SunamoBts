@@ -1,3 +1,4 @@
+// variables names: ok
 namespace SunamoBts;
 
 public partial class BTS
