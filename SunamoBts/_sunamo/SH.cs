@@ -1,4 +1,3 @@
-// variables names: ok
 namespace SunamoBts._sunamo;
 
 internal class SH
