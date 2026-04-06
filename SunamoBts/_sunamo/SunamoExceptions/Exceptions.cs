@@ -74,7 +74,7 @@ internal sealed partial class Exceptions
         var methodBase = stackTrace.GetFrame(depth)?.GetMethod();
         if (methodBase == null)
         {
-            return "Method name cannot be get";
+            return "Method name cannot be retrieved";
         }
         var methodName = methodBase.Name;
         return methodName;

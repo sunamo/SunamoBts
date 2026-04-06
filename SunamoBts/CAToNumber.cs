@@ -41,7 +41,7 @@ public class CAToNumber
     /// <param name="list">The list to convert.</param>
     /// <param name="requiredLength">The required length of the list.</param>
     /// <returns>A list of integers if successful and length matches; otherwise, null.</returns>
-    public static List<int>? ToInt1(IList list, int requiredLength)
+    public static List<int>? ToIntWithLengthValidation(IList list, int requiredLength)
     {
         return ToNumber<int>(BTS.TryParseInt, list, requiredLength);
     }
@@ -76,11 +76,11 @@ public class CAToNumber
 
     /// <summary>
     /// Converts a list of strings to a list of integers, truncating decimal parts.
-    /// If you need to return null when something doesn't fit, use ToInt with parameters or ToIntMinRequiredLength.
+    /// If you need to return null when something doesn't fit, use <see cref="ToIntWithLengthValidation"/> or <see cref="ToIntWithLengthValidationAndOffset"/>.
     /// </summary>
     /// <param name="list">The list of string values to convert.</param>
     /// <returns>A list of integers parsed from the string values.</returns>
-    public static List<int> ToInt0(List<string> list)
+    public static List<int> ToIntTruncating(List<string> list)
     {
         for (var i = 0; i < list.Count; i++)
         {
@@ -98,7 +98,7 @@ public class CAToNumber
     /// <param name="requiredLength">The required length of the result list.</param>
     /// <param name="startFrom">The starting index offset to begin parsing from.</param>
     /// <returns>A list of integers if successful and length matches; otherwise, null.</returns>
-    public static List<int>? ToInt2(IList list, int requiredLength, int startFrom)
+    public static List<int>? ToIntWithLengthValidationAndOffset(IList list, int requiredLength, int startFrom)
     {
         return ToNumber(BTS.TryParseInt, list, requiredLength, startFrom);
     }

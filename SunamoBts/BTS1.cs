@@ -136,23 +136,14 @@ public partial class BTS
 
     /// <summary>
     /// Converts a boolean value to its English string representation (Yes/No).
+    /// Delegates to <see cref="BoolToString(bool, bool)"/>.
     /// </summary>
     /// <param name="value">The boolean value to convert.</param>
     /// <param name="isLowerCase">If true, returns lowercase representation; otherwise, returns capitalized representation.</param>
     /// <returns>String representation of the boolean value in English.</returns>
     public static string BoolToStringEn(bool value, bool isLowerCase = false)
     {
-        string result;
-        if (value)
-            result = "Yes";
-        else
-            result = "No";
-        if (isLowerCase)
-        {
-            return result.ToLower();
-        }
-
-        return result;
+        return BoolToString(value, isLowerCase);
     }
 
     /// <summary>

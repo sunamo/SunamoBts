@@ -161,8 +161,6 @@ public partial class BTS
     private const string Ano = "Ano";
     private const string Ne = "Ne";
     private const string One = "1";
-    private const string Zero = "0";
-
     /// <summary>
     /// Returns bool representation of the text value. Returns true for "Yes", "True", "1", or "Ano" (Czech Yes).
     /// </summary>
@@ -260,7 +258,7 @@ public partial class BTS
     {
         var result = new List<string>(array.Length);
         for (var i = 0; i < array.Length; i++)
-            result[i] = array[i].ToString();
+            result.Add(array[i].ToString());
         return result;
     }
 

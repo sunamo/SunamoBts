@@ -25,7 +25,7 @@ Core class providing:
 
 Utility class for converting collections and arrays to numeric types:
 - `ToNumber<T>` - Generic conversion with parse method delegate, default value, and length validation
-- `ToInt0`, `ToInt1`, `ToInt2` - Specialized integer conversion with various options
+- `ToIntTruncating`, `ToIntWithLengthValidation`, `ToIntWithLengthValidationAndOffset` - Specialized integer conversion with various options
 
 ## Installation
 

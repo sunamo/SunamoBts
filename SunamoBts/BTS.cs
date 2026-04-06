@@ -244,11 +244,11 @@ public partial class BTS
         var result = new List<string>();
         for (var i = 0; i < args.Length; i++)
         {
-            var text = args[i];
+            var key = args[i];
             object value = args[++i];
             if (value != null)
             {
-                result.Add(text);
+                result.Add(key);
                 result.Add(value.ToString()!);
             }
         }
