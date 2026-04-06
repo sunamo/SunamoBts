@@ -1,28 +1,31 @@
 # SunamoBts
 
-Advanced working with base .NET type (parsing etc.)
+Advanced utilities for working with base .NET types including parsing, conversion, and type system operations.
 
 ## Overview
 
-SunamoBts is part of the Sunamo package ecosystem, providing modular, platform-independent utilities for .NET development.
+SunamoBts is part of the Sunamo package ecosystem, providing modular, platform-independent utilities for .NET development. It focuses on safe parsing of primitive types with fallback values, type conversions between numeric types, and common boolean/string operations.
 
 ## Main Components
 
-### Key Classes
+### BTS (Basic Type System)
 
-- **BTS**
-- **CAToNumber**
+Core class providing:
+- **Parsing methods** - `ParseInt`, `ParseFloat`, `ParseDouble`, `ParseBool`, `ParseByte`, `ParseShort` with default value support
+- **TryParse methods** - `TryParseInt`, `TryParseBool`, `TryParseByte`, `TryParseDateTime`, `TryParseUint` with safe fallbacks
+- **Type validation** - `IsInt`, `IsFloat`, `IsDouble`, `IsLong`, `IsBool`, `IsByte`, `IsDateTime`
+- **Conversions** - `BoolToInt`, `IntToBool`, `BoolToString`, `StringToBool`, `FromHex`
+- **Stream utilities** - `StreamFromString`, `StringFromStream`
+- **Date formatting** - `SameLengthAllDateTimes`, `SameLengthAllDates`, `SameLengthAllTimes`, `UsaDateTimeToString`
+- **Byte operations** - `ConvertFromUtf8ToBytes`, `ConvertFromBytesToUtf8`, `ClearEndingsBytes`
+- **Collection casting** - `CastArrayObjectToString`, `CastCollectionStringToInt`, `CastCollectionShortToInt`
+- **Type introspection** - `GetMaxValueForType`, `GetMinValueForType`, `MethodForParse<T>`
 
-### Key Methods
+### CAToNumber (Collection Array To Number)
 
-- `Replace()`
-- `IsFloat()`
-- `IsDouble()`
-- `IsInt()`
-- `IsLong()`
-- `ToInt1()`
-- `ToInt0()`
-- `ToInt2()`
+Utility class for converting collections and arrays to numeric types:
+- `ToNumber<T>` - Generic conversion with parse method delegate, default value, and length validation
+- `ToInt0`, `ToInt1`, `ToInt2` - Specialized integer conversion with various options
 
 ## Installation
 
@@ -30,22 +33,16 @@ SunamoBts is part of the Sunamo package ecosystem, providing modular, platform-i
 dotnet add package SunamoBts
 ```
 
+## Target Frameworks
+
+- .NET 10.0
+- .NET 9.0
+- .NET 8.0
+
 ## Dependencies
 
-- **Microsoft.Extensions.Logging.Abstractions** (v9.0.3)
-
-## Package Information
-
-- **Package Name**: SunamoBts
-- **Version**: 25.6.7.1
-- **Target Framework**: net9.0
-- **Category**: Platform-Independent NuGet Package
-- **Source Files**: 11
-
-## Related Packages
-
-This package is part of the Sunamo package ecosystem. For more information about related packages, visit the main repository.
+- **Microsoft.Extensions.Logging.Abstractions**
 
 ## License
 
-See the repository root for license information.
+MIT

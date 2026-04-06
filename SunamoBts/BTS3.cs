@@ -3,18 +3,21 @@ namespace SunamoBts;
 public partial class BTS
 {
     /// <summary>
-    ///     Before use you can call RemoveNotNumber to avoid raise exception
+    /// Casts a list of shorts to a list of integers.
+    /// Before use you can call RemoveNotNumber to avoid raising an exception.
     /// </summary>
-    public static List<int> CastListShortToListInt(List<short> numbers)
+    /// <param name="list">The list of shorts to convert.</param>
+    /// <returns>A list of integers converted from the short list.</returns>
+    public static List<int> CastListShortToListInt(List<short> list)
     {
-        return CastCollectionShortToInt(numbers);
+        return CastCollectionShortToInt(list);
     }
 
     /// <summary>
-    /// Pads a number with leading zeros to ensure at least 3 digits
+    /// Pads a number with leading zeros to ensure at least 3 digits.
     /// </summary>
-    /// <param name="number">The number to pad</param>
-    /// <returns>A string representation with leading zeros if the number has less than 3 digits</returns>
+    /// <param name="number">The number to pad.</param>
+    /// <returns>A string representation with leading zeros if the number has less than 3 digits.</returns>
     public static object MakeUpTo3NumbersToZero(int number)
     {
         var digitCount = number.ToString().Length;
@@ -26,10 +29,10 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Pads a number with a leading zero to ensure at least 2 digits
+    /// Pads a number with a leading zero to ensure at least 2 digits.
     /// </summary>
-    /// <param name="number">The number to pad</param>
-    /// <returns>A string representation with a leading zero if the number has only 1 digit</returns>
+    /// <param name="number">The number to pad.</param>
+    /// <returns>A string representation with a leading zero if the number has only 1 digit.</returns>
     public static object MakeUpTo2NumbersToZero(int number)
     {
         if (number.ToString().Length == 1)
@@ -38,10 +41,11 @@ public partial class BTS
     }
 
     /// <summary>
-    ///     Does not shorten the year, uses standard 4-digit format
-    ///     Produces format as standard text using DateTime.ToString() method
+    /// Formats a DateTime to a fixed-length date-time string (dd.MM.yyyy HH:mm:ss format).
+    /// Does not shorten the year, uses standard 4-digit format.
     /// </summary>
-    /// <param name = "dateTime"></param>
+    /// <param name="dateTime">The DateTime to format.</param>
+    /// <returns>A formatted date-time string in dd.MM.yyyy HH:mm:ss format.</returns>
     public static string SameLengthAllDateTimes(DateTime dateTime)
     {
         var year = dateTime.Year.ToString();
@@ -54,10 +58,10 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Formats a DateTime to a date string with consistent padding (dd.MM.yyyy format)
+    /// Formats a DateTime to a date string with consistent padding (dd.MM.yyyy format).
     /// </summary>
-    /// <param name="dateTime">The DateTime to format</param>
-    /// <returns>A formatted date string in dd.MM.yyyy format</returns>
+    /// <param name="dateTime">The DateTime to format.</param>
+    /// <returns>A formatted date string in dd.MM.yyyy format.</returns>
     public static string SameLengthAllDates(DateTime dateTime)
     {
         var year = dateTime.Year.ToString();
@@ -67,10 +71,10 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Formats a DateTime to a time string with consistent padding (HH:mm:ss format)
+    /// Formats a DateTime to a time string with consistent padding (HH:mm:ss format).
     /// </summary>
-    /// <param name="dateTime">The DateTime to format</param>
-    /// <returns>A formatted time string in HH:mm:ss format</returns>
+    /// <param name="dateTime">The DateTime to format.</param>
+    /// <returns>A formatted time string in HH:mm:ss format.</returns>
     public static string SameLengthAllTimes(DateTime dateTime)
     {
         var hour = dateTime.Hour.ToString("D2");
@@ -80,21 +84,21 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Formats a DateTime to a US-style date-time string (M/d/yyyy H:m:s format)
+    /// Formats a DateTime to a US-style date-time string (M/d/yyyy H:m:s format).
     /// </summary>
-    /// <param name="dateTime">The DateTime to format</param>
-    /// <returns>A formatted date-time string in US format (M/d/yyyy H:m:s)</returns>
+    /// <param name="dateTime">The DateTime to format.</param>
+    /// <returns>A formatted date-time string in US format (M/d/yyyy H:m:s).</returns>
     public static string UsaDateTimeToString(DateTime dateTime)
     {
         return dateTime.Month + "/" + dateTime.Day + "/" + dateTime.Year + " " + dateTime.Hour + ":" + dateTime.Minute + ":" + dateTime.Second;
     }
 
     /// <summary>
-    /// Compares two DateTime values to check if they represent the same date, ignoring time components
+    /// Compares two DateTime values to check if they represent the same date, ignoring time components.
     /// </summary>
-    /// <param name="firstDateTime">The first DateTime to compare</param>
-    /// <param name="secondDateTime">The second DateTime to compare</param>
-    /// <returns>True if both dates have the same day, month, and year; otherwise, false</returns>
+    /// <param name="firstDateTime">The first DateTime to compare.</param>
+    /// <param name="secondDateTime">The second DateTime to compare.</param>
+    /// <returns>True if both dates have the same day, month, and year; otherwise, false.</returns>
     public static bool EqualDateWithoutTime(DateTime firstDateTime, DateTime secondDateTime)
     {
         if (firstDateTime.Day == secondDateTime.Day && firstDateTime.Month == secondDateTime.Month && firstDateTime.Year == secondDateTime.Year)
@@ -103,11 +107,11 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Generates a numbered list of strings from a starting value to a maximum value (inclusive)
+    /// Generates a numbered list of strings from a starting value to a maximum value (inclusive).
     /// </summary>
-    /// <param name="from">The starting number</param>
-    /// <param name="max">The maximum number (inclusive)</param>
-    /// <returns>An array of strings representing numbers from the start to max value</returns>
+    /// <param name="from">The starting number.</param>
+    /// <param name="max">The maximum number (inclusive).</param>
+    /// <returns>An array of strings representing numbers from the start to max value.</returns>
     public static string[] GetNumberedListFromTo(int from, int max)
     {
         max++;
@@ -118,12 +122,12 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Generates a numbered list of strings with a custom postfix from a starting value to a maximum value
+    /// Generates a numbered list of strings with a custom postfix from a starting value to a maximum value.
     /// </summary>
-    /// <param name="start">The starting number</param>
-    /// <param name="max">The count of numbers to generate</param>
-    /// <param name="postfix">The postfix to append to each number (default is ". ")</param>
-    /// <returns>A list of strings with numbers and the specified postfix</returns>
+    /// <param name="start">The starting number.</param>
+    /// <param name="max">The count of numbers to generate.</param>
+    /// <param name="postfix">The postfix to append to each number (default is ". ").</param>
+    /// <returns>A list of strings with numbers and the specified postfix.</returns>
     public static List<string> GetNumberedListFromTo(int start, int max, string postfix = ". ")
     {
         max++;

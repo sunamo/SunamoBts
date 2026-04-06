@@ -3,19 +3,20 @@ namespace SunamoBts;
 public partial class BTS
 {
     /// <summary>
-    ///     0 - false, all other - 1
+    /// Converts an integer to a boolean value. 0 returns false, all other values return true.
     /// </summary>
-    /// <param name = "value"></param>
+    /// <param name="value">The integer value to convert.</param>
+    /// <returns>True if the value is non-zero; otherwise, false.</returns>
     public static bool IntToBool(int value)
     {
         return Convert.ToBoolean(value);
     }
 
     /// <summary>
-    /// Parses a string value to a float, replacing comma with dot for decimal separation
+    /// Parses a string value to a float, replacing comma with dot for decimal separation.
     /// </summary>
-    /// <param name="text">The string value to parse</param>
-    /// <returns>The parsed float value or float.MinValue if parsing fails</returns>
+    /// <param name="text">The string value to parse.</param>
+    /// <returns>The parsed float value or float.MinValue if parsing fails.</returns>
     public static float ParseFloat(string text)
     {
         var result = float.MinValue;
@@ -26,9 +27,10 @@ public partial class BTS
     }
 
     /// <summary>
-    ///     Returns false if parsing fails
+    /// Parses a string value to a boolean. Returns false if parsing fails.
     /// </summary>
-    /// <param name = "text"></param>
+    /// <param name="text">The string value to parse.</param>
+    /// <returns>The parsed boolean value, or false if parsing fails.</returns>
     public static bool ParseBool(string text)
     {
         var result = false;
@@ -38,11 +40,11 @@ public partial class BTS
     }
 
     /// <summary>
-    ///     Returns the default value if parsing fails
+    /// Parses a string value to a boolean. Returns the default value if parsing fails.
     /// </summary>
-    /// <param name = "text">The string value to parse</param>
-    /// <param name = "defaultValue">The default value to return if parsing fails</param>
-    /// <returns>Parsed boolean value or default value if parsing fails</returns>
+    /// <param name="text">The string value to parse.</param>
+    /// <param name="defaultValue">The default value to return if parsing fails.</param>
+    /// <returns>Parsed boolean value or default value if parsing fails.</returns>
     public static bool ParseBool(string text, bool defaultValue)
     {
         var result = false;
@@ -52,11 +54,11 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Parses a string value to an int with optional strict parsing requirement
+    /// Parses a string value to an int with optional strict parsing requirement.
     /// </summary>
-    /// <param name="text">The string value to parse</param>
-    /// <param name="isRequiringAllNumbers">If true, returns int.MinValue when parsing fails; otherwise, returns 0</param>
-    /// <returns>The parsed int value, int.MinValue if strict mode fails, or 0 if non-strict mode fails</returns>
+    /// <param name="text">The string value to parse.</param>
+    /// <param name="isRequiringAllNumbers">If true, returns int.MinValue when parsing fails; otherwise, returns 0.</param>
+    /// <returns>The parsed int value, int.MinValue if strict mode fails, or 0 if non-strict mode fails.</returns>
     public static int ParseInt(string text, bool isRequiringAllNumbers)
     {
         int result;
@@ -67,11 +69,11 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Parses a string value to a double, removing spaces before parsing
+    /// Parses a string value to a double, removing spaces before parsing.
     /// </summary>
-    /// <param name="text">The string value to parse</param>
-    /// <param name="defaultValue">The default value to return if parsing fails</param>
-    /// <returns>The parsed double value or the specified default value if parsing fails</returns>
+    /// <param name="text">The string value to parse.</param>
+    /// <param name="defaultValue">The default value to return if parsing fails.</param>
+    /// <returns>The parsed double value or the specified default value if parsing fails.</returns>
     public static double ParseDouble(string text, double defaultValue)
     {
         text = text.Replace(" ", string.Empty);
@@ -82,11 +84,11 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Parses a string value to an int, removing spaces before parsing
+    /// Parses a string value to an int, removing spaces before parsing.
     /// </summary>
-    /// <param name="text">The string value to parse</param>
-    /// <param name="defaultValue">The default value to return if parsing fails</param>
-    /// <returns>The parsed int value or the specified default value if parsing fails</returns>
+    /// <param name="text">The string value to parse.</param>
+    /// <param name="defaultValue">The default value to return if parsing fails.</param>
+    /// <returns>The parsed int value or the specified default value if parsing fails.</returns>
     public static int ParseInt(string text, int defaultValue)
     {
         text = text.Replace(" ", string.Empty);
@@ -97,11 +99,11 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Parses a string value to a byte with a default value
+    /// Parses a string value to a byte with a default value.
     /// </summary>
-    /// <param name="text">The string value to parse</param>
-    /// <param name="defaultValue">The default value to return if parsing fails</param>
-    /// <returns>The parsed byte value or the specified default value if parsing fails</returns>
+    /// <param name="text">The string value to parse.</param>
+    /// <param name="defaultValue">The default value to return if parsing fails.</param>
+    /// <returns>The parsed byte value or the specified default value if parsing fails.</returns>
     public static byte ParseByte(string text, byte defaultValue)
     {
         byte parsedValue = 0;
@@ -111,10 +113,10 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Determines whether the specified string value can be parsed as a byte
+    /// Determines whether the specified string value can be parsed as a byte.
     /// </summary>
-    /// <param name="text">The string value to validate</param>
-    /// <returns>True if the value can be parsed as byte; otherwise, false</returns>
+    /// <param name="text">The string value to validate.</param>
+    /// <returns>True if the value can be parsed as byte; otherwise, false.</returns>
     public static bool IsByte(string text)
     {
         if (text == null)
@@ -123,11 +125,11 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Determines whether the specified string value can be parsed as a byte and outputs the result
+    /// Determines whether the specified string value can be parsed as a byte and outputs the result.
     /// </summary>
-    /// <param name="text">The string value to validate</param>
-    /// <param name="result">When this method returns, contains the parsed byte value if successful, or 0 if parsing failed</param>
-    /// <returns>True if the value can be parsed as byte; otherwise, false</returns>
+    /// <param name="text">The string value to validate.</param>
+    /// <param name="result">When this method returns, contains the parsed byte value if successful, or 0 if parsing failed.</param>
+    /// <returns>True if the value can be parsed as byte; otherwise, false.</returns>
     public static bool IsByte(string text, out byte result)
     {
         if (text == null)
@@ -141,9 +143,11 @@ public partial class BTS
     }
 
     /// <summary>
-    ///     0 - false, all other - 1
+    /// Converts an object value to a boolean. 0 returns false, all other integer values return true.
+    /// Empty string returns false.
     /// </summary>
-    /// <param name = "value"></param>
+    /// <param name="value">The object value to convert.</param>
+    /// <returns>True if the value represents a non-zero integer; otherwise, false.</returns>
     public static bool IntToBool(object value)
     {
         var text = value.ToString()!.Trim();
@@ -152,39 +156,18 @@ public partial class BTS
         return Convert.ToBoolean(int.Parse(text));
     }
 
-    /// <summary>
-    /// Constant representing the English word "Yes"
-    /// </summary>
     private const string Yes = "Yes";
-
-    /// <summary>
-    /// Constant representing the English word "No"
-    /// </summary>
     private const string No = "No";
-
-    /// <summary>
-    /// Constant representing the Czech word "Ano" (Yes)
-    /// </summary>
     private const string Ano = "Ano";
-
-    /// <summary>
-    /// Constant representing the Czech word "Ne" (No)
-    /// </summary>
     private const string Ne = "Ne";
-
-    /// <summary>
-    /// Constant representing the string "1"
-    /// </summary>
     private const string One = "1";
+    private const string Zero = "0";
 
     /// <summary>
-    /// Constant representing the string "0"
+    /// Returns bool representation of the text value. Returns true for "Yes", "True", "1", or "Ano" (Czech Yes).
     /// </summary>
-    private const string Zero = "0";
-    /// <summary>
-    ///     Returns bool representation of the text value. Returns true for Yes, true string, "1", or "Ano"
-    /// </summary>
-    /// <param name = "text"></param>
+    /// <param name="text">The string value to convert to boolean.</param>
+    /// <returns>True if the text matches a known truthy value; otherwise, false.</returns>
     public static bool StringToBool(string text)
     {
         if (text == Yes || text == bool.TrueString || text == One || text == Ano)
@@ -193,9 +176,10 @@ public partial class BTS
     }
 
     /// <summary>
-    ///     Returns string representation for the bool value - Ano/Ne (Czech Yes/No)
+    /// Returns Czech string representation for the bool value (Ano/Ne).
     /// </summary>
-    /// <param name = "value"></param>
+    /// <param name="value">The boolean value to convert.</param>
+    /// <returns>"Ano" for true, "Ne" for false.</returns>
     public static string BoolToString(bool value)
     {
         if (value)
@@ -204,11 +188,11 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Converts a boolean value to its English string representation (Yes/No)
+    /// Converts a boolean value to its English string representation (Yes/No).
     /// </summary>
-    /// <param name="value">The boolean value to convert</param>
-    /// <param name="isLowerCase">If true, returns lowercase representation; otherwise, returns capitalized representation</param>
-    /// <returns>String representation of the boolean value in English</returns>
+    /// <param name="value">The boolean value to convert.</param>
+    /// <param name="isLowerCase">If true, returns lowercase representation; otherwise, returns capitalized representation.</param>
+    /// <returns>String representation of the boolean value in English.</returns>
     public static string BoolToString(bool value, bool isLowerCase = false)
     {
         string result;
@@ -225,86 +209,88 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Converts a UTF-8 string to a list of bytes
+    /// Converts a UTF-8 string to a list of bytes.
     /// </summary>
-    /// <param name="text">The string text to convert</param>
-    /// <returns>A list of bytes representing the UTF-8 encoded string</returns>
+    /// <param name="text">The string text to convert.</param>
+    /// <returns>A list of bytes representing the UTF-8 encoded string.</returns>
     public static List<byte> ConvertFromUtf8ToBytes(string text)
     {
         return Encoding.UTF8.GetBytes(text).ToList();
     }
 
     /// <summary>
-    /// Converts a list of bytes to a UTF-8 string
+    /// Converts a list of bytes to a UTF-8 string.
     /// </summary>
-    /// <param name="bytes">The list of bytes to convert</param>
-    /// <returns>A UTF-8 decoded string from the byte array</returns>
-    public static string ConvertFromBytesToUtf8(List<byte> bytes)
+    /// <param name="list">The list of bytes to convert.</param>
+    /// <returns>A UTF-8 decoded string from the byte array.</returns>
+    public static string ConvertFromBytesToUtf8(List<byte> list)
     {
-        return Encoding.UTF8.GetString(bytes.ToArray());
+        return Encoding.UTF8.GetString(list.ToArray());
     }
 
     /// <summary>
-    /// Determines whether the specified object value is null or represents a false boolean value
+    /// Determines whether the specified object value is null or represents a false boolean value.
     /// </summary>
-    /// <param name="value">The object value to check</param>
-    /// <returns>True if the value is null or equals the string representation of false; otherwise, false</returns>
+    /// <param name="value">The object value to check.</param>
+    /// <returns>True if the value is null or equals the string representation of false; otherwise, false.</returns>
     public static bool FalseOrNull(object value)
     {
         return value == null || value.ToString() == false.ToString();
     }
 
     /// <summary>
-    /// Converts an array of objects to a list of strings
+    /// Converts an array of objects to a list of strings.
     /// </summary>
-    /// <param name="args">The array of objects to convert</param>
-    /// <returns>A list of strings representing the string representation of each object</returns>
-    public static List<string> CastArrayObjectToString(object[] args)
+    /// <param name="array">The array of objects to convert.</param>
+    /// <returns>A list of strings representing the string representation of each object.</returns>
+    public static List<string> CastArrayObjectToString(object[] array)
     {
-        var result = new List<string>(args.Length);
-        for (var i = 0; i < args.Length; i++)
-            result.Add(args[i].ToString()!);
+        var result = new List<string>(array.Length);
+        for (var i = 0; i < array.Length; i++)
+            result.Add(array[i].ToString()!);
         return result;
     }
 
     /// <summary>
-    /// Converts an array of integers to a list of strings
+    /// Converts an array of integers to a list of strings.
     /// </summary>
-    /// <param name="numbers">The array of integers to convert</param>
-    /// <returns>A list of strings representing the string representation of each integer</returns>
-    public static List<string> CastArrayIntToString(int[] numbers)
+    /// <param name="array">The array of integers to convert.</param>
+    /// <returns>A list of strings representing the string representation of each integer.</returns>
+    public static List<string> CastArrayIntToString(int[] array)
     {
-        var result = new List<string>(numbers.Length);
-        for (var i = 0; i < numbers.Length; i++)
-            result[i] = numbers[i].ToString();
+        var result = new List<string>(array.Length);
+        for (var i = 0; i < array.Length; i++)
+            result[i] = array[i].ToString();
         return result;
     }
 
     /// <summary>
-    /// Casts a generic list to a list of integers
+    /// Casts a generic list to a list of integers.
     /// </summary>
-    /// <typeparam name="U">The type of elements in the source list</typeparam>
-    /// <param name="list">The list to convert</param>
-    /// <returns>A list of integers parsed from the source list</returns>
+    /// <typeparam name="U">The type of elements in the source list.</typeparam>
+    /// <param name="list">The list to convert.</param>
+    /// <returns>A list of integers parsed from the source list.</returns>
     public static List<int> CastToIntList<U>(IList<U> list)
     {
         return CAToNumber.ToNumber(int.Parse, list);
     }
 
     /// <summary>
-    ///     Throws an exception if any value cannot be cast to int
-    ///     Before use you can call RemoveNotNumber to avoid raise exception
+    /// Casts a collection of strings to a list of integers.
+    /// Throws an exception if any value cannot be cast to int.
+    /// Before use you can call RemoveNotNumber to avoid raising an exception.
     /// </summary>
-    /// <param name = "list"></param>
+    /// <param name="list">The list of strings to convert.</param>
+    /// <returns>A list of integers parsed from the string collection.</returns>
     public static List<int> CastCollectionStringToInt(IList<string> list)
     {
         return CAToNumber.ToNumber(int.Parse, list);
     }
 
     /// <summary>
-    ///     Direct edit
+    /// Removes elements from the list that are not valid numbers. Modifies the list directly.
     /// </summary>
-    /// <param name = "list"></param>
+    /// <param name="list">The list to filter, removing non-numeric elements.</param>
     public static void RemoveNotNumber(IList list)
     {
         for (var i = list.Count - 1; i >= 0; i--)
@@ -313,27 +299,29 @@ public partial class BTS
     }
 
     /// <summary>
-    ///     Before use you can call RemoveNotNumber to avoid raise exception
+    /// Casts a collection of shorts to a list of integers.
+    /// Before use you can call RemoveNotNumber to avoid raising an exception.
     /// </summary>
-    /// <param name = "numbers"></param>
-    public static List<int> CastCollectionShortToInt(List<short> numbers)
+    /// <param name="list">The list of shorts to convert.</param>
+    /// <returns>A list of integers converted from the short collection.</returns>
+    public static List<int> CastCollectionShortToInt(List<short> list)
     {
         var result = new List<int>();
-        for (var i = 0; i < numbers.Count; i++)
-            result.Add(numbers[i]);
+        for (var i = 0; i < list.Count; i++)
+            result.Add(list[i]);
         return result;
     }
 
     /// <summary>
-    /// Converts a list of integers to a list of shorts
+    /// Converts a list of integers to a list of shorts.
     /// </summary>
-    /// <param name="numbers">The list of integers to convert</param>
-    /// <returns>A list of shorts converted from the integer list</returns>
-    public static List<short> CastCollectionIntToShort(List<int> numbers)
+    /// <param name="list">The list of integers to convert.</param>
+    /// <returns>A list of shorts converted from the integer list.</returns>
+    public static List<short> CastCollectionIntToShort(List<int> list)
     {
-        var result = new List<short>(numbers.Count);
-        for (var i = 0; i < numbers.Count; i++)
-            result.Add((short)numbers[i]);
+        var result = new List<short>(list.Count);
+        for (var i = 0; i < list.Count; i++)
+            result.Add((short)list[i]);
         return result;
     }
 }
