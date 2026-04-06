@@ -109,14 +109,14 @@ public partial class BTS
     /// <summary>
     /// Generates a numbered list of strings from a starting value to a maximum value (inclusive).
     /// </summary>
-    /// <param name="from">The starting number.</param>
+    /// <param name="start">The starting number.</param>
     /// <param name="max">The maximum number (inclusive).</param>
     /// <returns>An array of strings representing numbers from the start to max value.</returns>
-    public static string[] GetNumberedListFromTo(int from, int max)
+    public static string[] GetNumberedListFromTo(int start, int max)
     {
         max++;
         var result = new List<string>();
-        for (var i = from; i < max; i++)
+        for (var i = start; i < max; i++)
             result.Add(i.ToString());
         return result.ToArray();
     }

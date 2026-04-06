@@ -121,7 +121,9 @@ public partial class BTS
     {
         if (text == null)
             return false;
-        return byte.TryParse(text, out LastByte);
+        var isParsed = byte.TryParse(text, out var parsedByte);
+        LastByte = parsedByte;
+        return isParsed;
     }
 
     /// <summary>

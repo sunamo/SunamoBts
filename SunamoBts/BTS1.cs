@@ -54,7 +54,9 @@ public partial class BTS
     {
         if (text == null)
             return false;
-        return DateTime.TryParse(text, out LastDateTime);
+        var isParsed = DateTime.TryParse(text, out var parsedDateTime);
+        LastDateTime = parsedDateTime;
+        return isParsed;
     }
 
     /// <summary>
@@ -80,7 +82,9 @@ public partial class BTS
     {
         if (text == null)
             return false;
-        return bool.TryParse(text, out LastBool);
+        var isParsed = bool.TryParse(text, out var parsedBool);
+        LastBool = parsedBool;
+        return isParsed;
     }
 
     /// <summary>
@@ -232,7 +236,7 @@ public partial class BTS
     /// <summary>
     /// Stores the last successfully parsed uint value from TryParseUint.
     /// </summary>
-    public static uint LastUint;
+    public static uint LastUint { get; set; }
 
     /// <summary>
     /// Attempts to parse a string value to a uint and stores the result in LastUint.
@@ -241,7 +245,9 @@ public partial class BTS
     /// <returns>True if parsing succeeded; otherwise, false.</returns>
     public static bool TryParseUint(string text)
     {
-        return uint.TryParse(text, out LastUint);
+        var isParsed = uint.TryParse(text, out var parsedUint);
+        LastUint = parsedUint;
+        return isParsed;
     }
 
     /// <summary>
@@ -251,8 +257,11 @@ public partial class BTS
     /// <returns>True if parsing succeeded; otherwise, false.</returns>
     public static bool TryParseDateTime(string text)
     {
-        if (DateTime.TryParse(text, out LastDateTime))
+        if (DateTime.TryParse(text, out var parsedDateTime))
+        {
+            LastDateTime = parsedDateTime;
             return true;
+        }
         return false;
     }
 

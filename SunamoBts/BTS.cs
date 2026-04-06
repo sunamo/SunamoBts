@@ -8,37 +8,37 @@ public partial class BTS
     /// <summary>
     /// Last successfully parsed int value.
     /// </summary>
-    public static int LastInt = -1;
+    public static int LastInt { get; set; } = -1;
 
     /// <summary>
     /// Last successfully parsed long value.
     /// </summary>
-    public static long LastLong = -1;
+    public static long LastLong { get; set; } = -1;
 
     /// <summary>
     /// Last successfully parsed float value.
     /// </summary>
-    public static float LastFloat = -1;
+    public static float LastFloat { get; set; } = -1;
 
     /// <summary>
     /// Last successfully parsed double value.
     /// </summary>
-    public static double LastDouble = -1;
+    public static double LastDouble { get; set; } = -1;
 
     /// <summary>
     /// Last successfully parsed byte value.
     /// </summary>
-    public static byte LastByte = 255;
+    public static byte LastByte { get; set; } = 255;
 
     /// <summary>
     /// Last successfully parsed bool value.
     /// </summary>
-    public static bool LastBool;
+    public static bool LastBool { get; set; }
 
     /// <summary>
     /// Last successfully parsed DateTime value.
     /// </summary>
-    public static DateTime LastDateTime = DateTime.MinValue;
+    public static DateTime LastDateTime { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Replaces comma with dot in the string value if specified.
@@ -64,7 +64,9 @@ public partial class BTS
         if (text == null)
             return false;
         Replace(ref text, isReplacingCommaForDot);
-        return float.TryParse(text.Replace(",", "."), out LastFloat);
+        var isParsed = float.TryParse(text.Replace(",", "."), out var parsedFloat);
+        LastFloat = parsedFloat;
+        return isParsed;
     }
 
     /// <summary>
@@ -78,7 +80,9 @@ public partial class BTS
         if (text == null)
             return false;
         Replace(ref text, isReplacingCommaForDot);
-        return double.TryParse(text.Replace(",", "."), out LastDouble);
+        var isParsed = double.TryParse(text.Replace(",", "."), out var parsedDouble);
+        LastDouble = parsedDouble;
+        return isParsed;
     }
 
     /// <summary>
@@ -96,7 +100,8 @@ public partial class BTS
             return false;
         text = text.Replace(" ", "");
         Replace(ref text, isReplacingCommaForDot);
-        var result = int.TryParse(text, out LastInt);
+        var result = int.TryParse(text, out var parsedInt);
+        LastInt = parsedInt;
         if (!result)
             if (IsFloat(text))
                 if (isThrowingExceptionIfFloat)
@@ -118,7 +123,8 @@ public partial class BTS
             return false;
         text = text.Replace(" ", "");
         Replace(ref text, isReplacingCommaForDot);
-        var result = long.TryParse(text, out LastLong);
+        var result = long.TryParse(text, out var parsedLong);
+        LastLong = parsedLong;
         if (!result)
             if (IsDouble(text))
                 if (isThrowingExceptionIfDouble)
@@ -170,7 +176,9 @@ public partial class BTS
     /// <returns>True if parsing succeeded, false otherwise.</returns>
     public static bool TryParseBool(string text)
     {
-        return bool.TryParse(text, out LastBool);
+        var isParsed = bool.TryParse(text, out var parsedBool);
+        LastBool = parsedBool;
+        return isParsed;
     }
 
     /// <summary>
@@ -328,8 +336,11 @@ public partial class BTS
     /// <returns>Parsed integer or null if parsing failed.</returns>
     public static int? ParseIntNull(string text)
     {
-        if (int.TryParse(text, out LastInt))
-            return LastInt;
+        if (int.TryParse(text, out var parsedInt))
+        {
+            LastInt = parsedInt;
+            return parsedInt;
+        }
         return null;
     }
 
