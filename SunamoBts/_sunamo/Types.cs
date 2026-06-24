@@ -1,8 +1,5 @@
 namespace SunamoBts._sunamo;
 
-/// <summary>
-/// Cached type references for common .NET types used in type comparisons and parsing operations.
-/// </summary>
 internal class Types
 {
     internal static readonly Type ObjectType = typeof(object);
