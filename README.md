@@ -1,5 +1,10 @@
 # SunamoBts
 
+## Short description
+
+Pokročilé pomocné metody pro základní typy .NET, zejména parsování, převody a práci s typovým systémem.
+
+
 Advanced utilities for working with base .NET types including parsing, conversion, and type system operations.
 
 ## Overview
