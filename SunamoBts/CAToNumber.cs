@@ -1,9 +1,21 @@
 namespace SunamoBts;
 
 // Collection Array To Number - utilities for converting collections and arrays to numeric types.
+/// <summary>
+/// Represents the CA to number type.
+/// </summary>
 public class CAToNumber
 {
     // Default value will be used when a parsed element is not a number to return a recognizable bad value.
+    /// <summary>
+    /// To number t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="parseMethod">The parse method.</param>
+    /// <param name="list">The list.</param>
+    /// <param name="defaultValue">The default value.</param>
+    /// <param name="isRequiringAllNumbers">The is requiring all numbers.</param>
+    /// <returns>The to number t result.</returns>
     public static List<T> ToNumber<T>(Func<string, T, T> parseMethod, IList list, T defaultValue,
         bool isRequiringAllNumbers = true)
     {
@@ -24,12 +36,26 @@ public class CAToNumber
         return result;
     }
 
+    /// <summary>
+    /// To int with length validation.
+    /// </summary>
+    /// <param name="list">The list.</param>
+    /// <param name="requiredLength">The required length.</param>
+    /// <returns>The to int with length validation result.</returns>
     public static List<int>? ToIntWithLengthValidation(IList list, int requiredLength)
     {
         return ToNumber<int>(BTS.TryParseInt, list, requiredLength);
     }
 
     // If the list does not have the required length or an element cannot be parsed to T, returns null.
+    /// <summary>
+    /// To number t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="parseMethod">The parse method.</param>
+    /// <param name="list">The list.</param>
+    /// <param name="requiredLength">The required length.</param>
+    /// <returns>The to number t result.</returns>
     public static List<T>? ToNumber<T>(Func<string, T, T> parseMethod, IList list, int requiredLength)
     {
         var listCount = list.Count;
@@ -50,6 +76,11 @@ public class CAToNumber
     }
 
     // If you need to return null when something doesn't fit, use ToIntWithLengthValidation or ToIntWithLengthValidationAndOffset.
+    /// <summary>
+    /// To int truncating.
+    /// </summary>
+    /// <param name="list">The list.</param>
+    /// <returns>The to int truncating result.</returns>
     public static List<int> ToIntTruncating(List<string> list)
     {
         for (var i = 0; i < list.Count; i++)
@@ -61,12 +92,25 @@ public class CAToNumber
         return ToNumber(int.Parse, list);
     }
 
+    /// <summary>
+    /// To int with length validation and offset.
+    /// </summary>
+    /// <param name="list">The list.</param>
+    /// <param name="requiredLength">The required length.</param>
+    /// <param name="startFrom">The start from.</param>
+    /// <returns>The to int with length validation and offset result.</returns>
     public static List<int>? ToIntWithLengthValidationAndOffset(IList list, int requiredLength, int startFrom)
     {
         return ToNumber(BTS.TryParseInt, list, requiredLength, startFrom);
     }
 
     // For use with requireAllNumbers, must use other parse func than default .NET.
+    /// <summary>
+    /// To number t u.
+    /// </summary>
+    /// <param name="parseMethod">The parse method.</param>
+    /// <param name="list">The list.</param>
+    /// <returns>The to number t u result.</returns>
     public static List<T> ToNumber<T, U>(Func<string, T> parseMethod, IList<U> list)
     {
         var result = new List<T>();
@@ -85,6 +129,15 @@ public class CAToNumber
     }
 
     // If an element in the list cannot be parsed to T, returns null.
+    /// <summary>
+    /// To number t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="parseMethod">The parse method.</param>
+    /// <param name="list">The list.</param>
+    /// <param name="requiredLength">The required length.</param>
+    /// <param name="startFrom">The start from.</param>
+    /// <returns>The to number t result.</returns>
     public static List<T>? ToNumber<T>(Func<string, T, T> parseMethod, IList list, int requiredLength, T startFrom)
         where T : IComparable
     {
