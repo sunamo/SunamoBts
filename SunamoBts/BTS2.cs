@@ -145,15 +145,17 @@ public partial class BTS
     }
 
     /// <summary>
-    /// Int to bool.
+    /// Converts a number written as text (0 is false, anything else true) or the words true/false to a logical value; empty text is false.
     /// </summary>
-    /// <param name="value">The value.</param>
-    /// <returns>The int to bool result.</returns>
+    /// <param name="value">The number, its text form, or the text true/false.</param>
+    /// <returns>The logical value.</returns>
     public static bool IntToBool(object value)
     {
         var text = value.ToString()!.Trim();
         if (text == string.Empty)
             return false;
+        if (bool.TryParse(text, out var parsed))
+            return parsed;
         return Convert.ToBoolean(int.Parse(text));
     }
 
